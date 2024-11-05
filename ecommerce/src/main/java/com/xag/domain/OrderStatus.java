@@ -1,4 +1,4 @@
-package com.xag.model;
+package com.xag.domain;
 
 public enum OrderStatus {
     PENDING,

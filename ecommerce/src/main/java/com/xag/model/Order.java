@@ -1,5 +1,6 @@
 package com.xag.model;
 
+import com.xag.domain.OrderStatus;
 import com.xag.domain.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -33,6 +35,7 @@ public class Order {
     @ManyToOne
     private Address shippingAddress;
 
+    @Embedded
     private PaymentDetails paymentDetails=new PaymentDetails();
 
     private double totalMrpPrice;
@@ -48,8 +51,6 @@ public class Order {
     private LocalDateTime orderDate=LocalDateTime.now();
 
     private LocalDateTime deliverDate=orderDate.plusDays(7);
-
-
 
 
 }

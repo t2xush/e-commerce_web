@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,6 +48,7 @@ public class Product {
 
     private String Sizes;
 
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Review> reviews= new ArrayList<>();
 
 
