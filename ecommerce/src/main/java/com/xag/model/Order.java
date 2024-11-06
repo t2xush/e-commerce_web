@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
+@Table(name = "orders")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
