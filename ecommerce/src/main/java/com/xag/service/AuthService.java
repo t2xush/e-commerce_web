@@ -1,4 +1,7 @@
 package com.xag.service;
 
-public class AuthService {
+import com.xag.response.SignupRequest;
+
+public interface AuthService {
+    String createUser(SignupRequest req);
 }
