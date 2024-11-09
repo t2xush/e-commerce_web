@@ -1,6 +1,8 @@
 package com.xag.controller;
 
 import com.xag.domain.USER_ROLE;
+import com.xag.model.VerificationCode;
+import com.xag.response.ApiResponse;
 import com.xag.response.AuthResponse;
 import com.xag.repository.UserRepository;
 import com.xag.response.SignupRequest;
@@ -17,7 +19,7 @@ public class AuthController {
     private final UserRepository userRepository;
     private final AuthService authService;
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody SignupRequest req){
+    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody SignupRequest req) throws Exception {
 //        User user=new User();
 //        user.setEmail(req.getEmail());
 //        user.setFullName(req.getFullName());
@@ -31,6 +33,21 @@ public class AuthController {
         res.setMessage("register success");
         res.setRole(USER_ROLE.ROLE_CUSTOMER);
 
+        return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/sent/login-signup-otp")
+    public ResponseEntity<ApiResponse> sentOtpHandler(
+            @RequestBody VerificationCode req) throws Exception {
+//        User user=new User();
+//        user.setEmail(req.getEmail());
+//        user.setFullName(req.getFullName());
+//
+//        User savedUser=userRepository.save(user);
+
+        authService.sentLoginOtp(req.getEmail());
+       ApiResponse res=new ApiResponse();
+        res.setMessage("otp sent successfully");
         return ResponseEntity.ok(res);
     }
 }
