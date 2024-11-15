@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
             category.setLevel(1);
             category1=categoryRepository.save(category);
         }
+
         Category category2=categoryRepository.findByCategoryId(req.getCategory2());
         if (category2==null){
             Category category=new Category();
@@ -49,12 +50,11 @@ public class ProductServiceImpl implements ProductService {
         }
 
 
-
-
         Category category3=categoryRepository.findByCategoryId(req.getCategory3());
         if (category3==null){
             Category category=new Category();
             category.setCategoryId(req.getCategory3());
+            category.setLevel(3);
             category.setParentCategory(category2);
             category3=categoryRepository.save(category);
         }
