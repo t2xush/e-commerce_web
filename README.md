@@ -3,7 +3,7 @@
 
 ## Tech Stack
 
-- **Backend**: Java 
+- **Backend**: Java (Spring Boot)
 - **Frontend**: React
 - **Database**: MySQL
 
