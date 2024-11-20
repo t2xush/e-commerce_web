@@ -12,7 +12,7 @@ import com.xag.repository.UserRepository;
 import com.xag.repository.VerificationCodeRepository;
 import com.xag.request.LoginRequest;
 import com.xag.response.AuthResponse;
-import com.xag.response.SignupRequest;
+import com.xag.request.SignupRequest;
 import com.xag.service.AuthService;
 import com.xag.service.EmailService;
 import com.xag.utils.OtpUtils;

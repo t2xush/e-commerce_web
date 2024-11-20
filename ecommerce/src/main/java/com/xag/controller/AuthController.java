@@ -1,13 +1,12 @@
 package com.xag.controller;
 
 import com.xag.domain.USER_ROLE;
-import com.xag.model.VerificationCode;
 import com.xag.request.LoginOtpRequest;
 import com.xag.request.LoginRequest;
 import com.xag.response.ApiResponse;
 import com.xag.response.AuthResponse;
 import com.xag.repository.UserRepository;
-import com.xag.response.SignupRequest;
+import com.xag.request.SignupRequest;
 import com.xag.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

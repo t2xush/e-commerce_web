@@ -11,7 +11,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

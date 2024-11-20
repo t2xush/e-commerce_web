@@ -1,4 +1,4 @@
-package com.xag.response;
+package com.xag.request;
 
 import lombok.Data;
 
