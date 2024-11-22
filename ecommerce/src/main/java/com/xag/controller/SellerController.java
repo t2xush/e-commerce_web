@@ -3,14 +3,15 @@ package com.xag.controller;
 import com.xag.domain.AccountStatus;
 import com.xag.exception.SellerException;
 import com.xag.model.Seller;
+import com.xag.model.SellerReport;
 import com.xag.model.VerificationCode;
 import com.xag.repository.VerificationCodeRepository;
 import com.xag.request.LoginRequest;
-import com.xag.response.ApiResponse;
 import com.xag.response.AuthResponse;
 import com.xag.service.AuthService;
 import com.xag.service.EmailService;
 import com.xag.service.SellerService;
+import com.xag.service.SellerReportService;
 import com.xag.utils.OtpUtils;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class SellerController {
     private final VerificationCodeRepository verificationCodeRepository;
     private final AuthService authService;
     private final EmailService emailService;
+    private final SellerReportService sellerReportService;
 
 
 
@@ -91,6 +93,16 @@ public class SellerController {
        Seller seller=sellerService.getSellerProfile(jwt);
        return new ResponseEntity<>(seller,HttpStatus.OK);
     }
+
+    @GetMapping("/report")
+    public ResponseEntity<SellerReport> getSellerReport(
+            @RequestHeader("Authorization") String jwt) throws Exception {
+        Seller seller=sellerService.getSellerProfile(jwt);
+        SellerReport report=sellerReportService.getSellerReport(seller);
+        return new ResponseEntity<>(report,HttpStatus.OK);
+
+    }
+
 
     @GetMapping
     public ResponseEntity<List<Seller>> getAllSellers(
