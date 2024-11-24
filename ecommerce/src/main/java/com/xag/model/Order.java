@@ -41,7 +41,7 @@ public class Order {
 
     private double totalMrpPrice;
 
-    private double totalSellingPrice;
+    private Integer totalSellingPrice;
 
     private Integer discount;
 

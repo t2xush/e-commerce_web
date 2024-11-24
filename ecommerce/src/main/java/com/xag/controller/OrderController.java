@@ -2,12 +2,9 @@ package com.xag.controller;
 
 import com.xag.domain.PaymentMethod;
 import com.xag.model.*;
+import com.xag.repository.PaymentOrderRepository;
 import com.xag.response.PaymentLinkResponse;
-import com.xag.service.CartService;
-import com.xag.service.OrderService;
-import com.xag.service.SellerService;
-import com.xag.service.UserService;
-import com.xag.service.SellerReportService;
+import com.xag.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +23,8 @@ public class OrderController {
     private final CartService cartService;
     private final SellerService sellerService;
     private final SellerReportService sellerReportService;
+    private final PaymentService paymentService;
+    private final PaymentOrderRepository paymentOrderRepository;
 
     @PostMapping()
     public ResponseEntity<PaymentLinkResponse> createOrderHandler(
@@ -37,7 +36,13 @@ public class OrderController {
         Cart cart=cartService.findeUserCart(user);
         Set<Order> orders=orderService.createOrder(user,shippingAddress,cart);
 
+        PaymentOrder paymentOrder=paymentService.createOrder(user,orders);
        PaymentLinkResponse res=new PaymentLinkResponse();
+
+       String paymentUrl=paymentService.createStripePaymentLink(user,
+               paymentOrder.getAmount(),
+               paymentOrder.getId());
+       res.setPayment_link_url(paymentUrl);
        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -82,7 +87,7 @@ public class OrderController {
         SellerReport report=sellerReportService.getSellerReport(seller);
 
         report.setCanceledOrders(report.getCanceledOrders()+1);
-        report.setTotalRefunds((long) (report.getTotalRefunds()+order.getTotalSellingPrice()));
+        report.setTotalRefunds(report.getTotalRefunds()+order.getTotalSellingPrice());
         sellerReportService.updateSellerReport(report);
 
         return ResponseEntity.ok(order);
