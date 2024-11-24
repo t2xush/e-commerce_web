@@ -7,9 +7,9 @@ import Navbar from './customer/components/Navbar/Navbar';
 
 function App() {
   return (
-    <div className="">
+   
      <Navbar/>
-    </div>
+   
   );
 }
 
