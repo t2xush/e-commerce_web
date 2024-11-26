@@ -10,6 +10,7 @@ import customeTheme from './Theme/customeTheme';
 import Home from './customer/pages/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import BecomeSeller from './customer/pages/BecomeSeller/BecomeSeller';
+import SellerDashBoard from './seller/pages/SellerDashBoard/SellerDashBoard';
 function App() {
   return (
 
@@ -20,7 +21,7 @@ function App() {
   <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/become-seller' element={<BecomeSeller/>}/>
-      <Route path='/seller' element={<BecomeSeller/>}/>
+      <Route path='/seller/*' element={<SellerDashBoard/>}/>
 
      </Routes>
 
