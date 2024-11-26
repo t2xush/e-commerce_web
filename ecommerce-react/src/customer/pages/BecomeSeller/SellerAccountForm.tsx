@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import BecomeSellerFormStep2 from "./BecomeSellerFormStep2";
 import BecomeSellerFormStep3 from "./BecomeSellerFormStep3";
 import BecomeSellerFormStep4 from "./BecomeSellerFormStep4";
+//seller signup ui
 
 const steps = [
   "Tax Details & Mobile",
