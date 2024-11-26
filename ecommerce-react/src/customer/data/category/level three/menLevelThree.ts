@@ -14,13 +14,7 @@ export const menLevelThree = [
         "parentCategoryId": "men_underwear",
         
     },
-    {
-        "name": "Bras",
-        "categoryId": "men_bras",
-        "parentCategoryName": "Underwear",
-        "parentCategoryId": "men_underwear",
-        
-    },
+    
 // clothing
 {
     "name": "Tops",
