@@ -7,11 +7,13 @@ import Avatar from '@mui/material/Avatar';
 import { AddShoppingCart, FavoriteBorder, Storefront } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
 import { light } from '@mui/material/styles/createPalette';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
   const theme = useTheme();
   const isLarge=useMediaQuery(theme.breakpoints.up("lg"));
+  const navigate=useNavigate()
 
   return (
     <div>
@@ -53,7 +55,7 @@ const Navbar = () => {
             <IconButton>
               <AddShoppingCart className='text-gray-700' sx={{fontSize:29}}/>
             </IconButton>
-           {isLarge && <Button startIcon={
+           {isLarge && <Button onClick={()=>navigate("/become-seller")}startIcon={
               <Storefront/>}
              variant='outlined'>Become Seller</Button>
              }
