@@ -1,7 +1,26 @@
-import { Box, Grid2, TextField } from "@mui/material";
+import { Box, Button, Grid2, TextField } from "@mui/material";
+import { useFormik } from "formik";
 import React from "react";
 
-const BecomeSellerFormStep2 = ({ formik }: any) => {
+const PickupAddress = () => {
+    const formik=useFormik({
+        initialValues:{
+            name:"",
+            mobile: "",
+            pinCode: "",
+            address: "",
+            locality:"",
+            city: "",
+            state: "",
+
+        },
+        onSubmit:(values)=>{
+            console.log("form submitted: " ,values)
+        }
+
+    })
+
+
   return (
     <Box>
       <Grid2 container spacing={3}>
@@ -11,7 +30,7 @@ const BecomeSellerFormStep2 = ({ formik }: any) => {
             fullWidth
             name="name"
             label="name"
-            value={formik.values.pickupAddress.name}
+            value={formik.values.name}
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
@@ -23,7 +42,7 @@ const BecomeSellerFormStep2 = ({ formik }: any) => {
             fullWidth
             name="mobile"
             label="Mobile"
-            value={formik.values.pickupAddress.mobile}
+            value={formik.values.mobile}
             onChange={formik.handleChange}
             error={formik.touched.mobile && Boolean(formik.errors.mobile)}
             helperText={formik.touched.mobile && formik.errors.mobile}
@@ -34,7 +53,7 @@ const BecomeSellerFormStep2 = ({ formik }: any) => {
             fullWidth
             name="pinCode"
             label="Pin Code"
-            value={formik.values.pickupAddress.pinCode}
+            value={formik.values.pinCode}
             onChange={formik.handleChange}
             error={formik.touched.pinCode && Boolean(formik.errors.pinCode)}
             helperText={formik.touched.pinCode && formik.errors.pinCode}
@@ -45,7 +64,7 @@ const BecomeSellerFormStep2 = ({ formik }: any) => {
             fullWidth
             name="address"
             label="address"
-            value={formik.values.pickupAddress.address}
+            value={formik.values.address}
             onChange={formik.handleChange}
             error={formik.touched.address && Boolean(formik.errors.address)}
             helperText={formik.touched.address && formik.errors.address}
@@ -56,7 +75,7 @@ const BecomeSellerFormStep2 = ({ formik }: any) => {
             fullWidth
             name="locality"
             label="locality"
-            value={formik.values.pickupAddress.locality}
+            value={formik.values.locality}
             onChange={formik.handleChange}
             error={formik.touched.locality && Boolean(formik.errors.locality)}
             helperText={formik.touched.locality && formik.errors.locality}
@@ -67,7 +86,7 @@ const BecomeSellerFormStep2 = ({ formik }: any) => {
             fullWidth
             name="city"
             label="city"
-            value={formik.values.pickupAddress.city}
+            value={formik.values.city}
             onChange={formik.handleChange}
             error={formik.touched.city && Boolean(formik.errors.city)}
             helperText={formik.touched.city && formik.errors.city}
@@ -78,11 +97,17 @@ const BecomeSellerFormStep2 = ({ formik }: any) => {
             fullWidth
             name="state"
             label="state"
-            value={formik.values.pickupAddress.state}
+            value={formik.values.state}
             onChange={formik.handleChange}
             error={formik.touched.state && Boolean(formik.errors.state)}
             helperText={formik.touched.state && formik.errors.state}
           />
+        </Grid2>
+        <Grid2 size={{ xs: 12 }}>
+          <Button  fullWidth variant="contained">
+            Submit
+          </Button>
+       
         </Grid2>
        
       </Grid2>
@@ -90,4 +115,5 @@ const BecomeSellerFormStep2 = ({ formik }: any) => {
   );
 };
 
-export default BecomeSellerFormStep2;
+
+export default PickupAddress
