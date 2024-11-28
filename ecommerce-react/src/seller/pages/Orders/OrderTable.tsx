@@ -52,11 +52,12 @@ export default function Ordertable() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Order Id</StyledTableCell>
+            <StyledTableCell>Products</StyledTableCell>
+            <StyledTableCell align="right">Shipping Address</StyledTableCell>
+            <StyledTableCell align="right">Order Status</StyledTableCell>
+            <StyledTableCell align="right">update</StyledTableCell>
+            
           </TableRow>
         </TableHead>
         <TableBody>
@@ -65,7 +66,7 @@ export default function Ordertable() {
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
+              <StyledTableCell >{row.calories}</StyledTableCell>
               <StyledTableCell align="right">{row.fat}</StyledTableCell>
               <StyledTableCell align="right">{row.carbs}</StyledTableCell>
               <StyledTableCell align="right">{row.protein}</StyledTableCell>
