@@ -11,6 +11,7 @@ import Home from './customer/pages/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import BecomeSeller from './customer/pages/BecomeSeller/BecomeSeller';
 import SellerDashBoard from './seller/pages/SellerDashBoard/SellerDashBoard';
+import AdminDashboard from './admin/pages/AdminDashboard/AdminDashboard';
 function App() {
   return (
 
@@ -22,6 +23,7 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/become-seller' element={<BecomeSeller/>}/>
       <Route path='/seller/*' element={<SellerDashBoard/>}/>
+      <Route path='/admin/*' element={<AdminDashboard/>}/>
 
      </Routes>
 
