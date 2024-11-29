@@ -66,7 +66,7 @@ const Coupon = () => {
       <div className='pb-5 w-60'>
 
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Account Status</InputLabel>
+          <InputLabel id="demo-simple-select-label">coupon Status</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

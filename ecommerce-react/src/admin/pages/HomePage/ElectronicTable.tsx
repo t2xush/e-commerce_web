@@ -1,8 +1,9 @@
 import React from 'react'
+import HomeCategoryTable from './HomeCategoryTable'
 
 const ElectronicTable = () => {
   return (
-    <div>ElectronicTable</div>
+    <div><HomeCategoryTable/></div>
   )
 }
 

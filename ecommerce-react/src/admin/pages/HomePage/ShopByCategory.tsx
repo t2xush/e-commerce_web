@@ -1,7 +1,8 @@
 import React from 'react'
+import HomeCategoryTable from './HomeCategoryTable'
 
 export const ShopByCategory = () => {
   return (
-    <div>ShopByCategory</div>
+    <div><HomeCategoryTable/></div>
   )
 }
