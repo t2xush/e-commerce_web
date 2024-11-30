@@ -8,23 +8,31 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { ThreeMpRounded } from '@mui/icons-material';
 import customeTheme from './Theme/customeTheme';
 import Home from './customer/pages/Home/Home';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import BecomeSeller from './customer/pages/BecomeSeller/BecomeSeller';
 import SellerDashBoard from './seller/pages/SellerDashBoard/SellerDashBoard';
 import AdminDashboard from './admin/pages/AdminDashboard/AdminDashboard';
 import Product from './customer/pages/Product/Product';
 import ProductDetails from './customer/pages/Page Details/ProductDetails';
 import { fetchProduct } from './state/fetchProduct';
-import { useAppDispatch } from './state/store';
+import { useAppDispatch, useAppSelector } from './state/store';
 import { fetchSellerProfile } from './state/seller/sellerSlice';
 
 function App() {
 const dispatch=useAppDispatch();
+const {seller}=useAppSelector(store=>store);
+const navigate=useNavigate()
 
 
    useEffect(()=>{
   dispatch(fetchSellerProfile(localStorage.getItem("jwt")||""))
    },[])
+
+   useEffect(()=>{
+   if(seller.profile){
+    navigate("/seller")
+   }
+     },[seller.profile])
 
 
   return (

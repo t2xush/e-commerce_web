@@ -12,6 +12,7 @@ export const fetchSellerProfile = createAsyncThunk(
         },
       });
       console.log("fetch seller profile", response);
+      return response.data;
     } catch (error) {
       console.log("error:", error);
     }
@@ -56,3 +57,5 @@ const sellerSlice=createSlice({
   }
   
 })
+
+export default sellerSlice.reducer;
