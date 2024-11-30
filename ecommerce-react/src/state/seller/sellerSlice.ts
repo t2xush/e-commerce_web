@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../config/Api";
 
+//fetch seller profile 
 export const fetchSellerProfile = createAsyncThunk(
   "/sellers/fetchSellerProfile",
   async (jwt: string, { rejectWithValue }) => {
