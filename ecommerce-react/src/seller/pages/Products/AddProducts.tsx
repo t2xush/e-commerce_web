@@ -14,6 +14,7 @@ import {
   CircularProgress,
   colors,
   FormControl,
+  FormHelperText,
   Grid2,
   IconButton,
   InputLabel,
@@ -22,6 +23,7 @@ import {
   TextField,
 } from "@mui/material";
 import { AddPhotoAlternate, Close, Label } from "@mui/icons-material";
+import { mainCategory } from "../../../customer/data/category/mainCategory";
 
 const categoryTwo: { [key: string]: any[] } = {
   men: menLevelTwo,
@@ -75,6 +77,12 @@ const AddProducts = () => {
     const updatedImages = [...formik.values.images];
     updatedImages.splice(index, 1);
     formik.setFieldValue("images", updatedImages);
+  };
+
+  const childCategory = (category: any, parentCategoryId: any) => {
+    return category.filter((child: any) => {
+      return child.parentCategoryId == parentCategoryId;
+    });
   };
 
   return (
@@ -209,6 +217,7 @@ const AddProducts = () => {
                 <MenuItem value="">
                   <em>none</em>
                 </MenuItem>
+                <MenuItem value="FREE">FREE </MenuItem>
 
                 {/* {colors.map((color,index)=><MenuItem value={color.name}>
             <div className="flexx gap-3>">
@@ -248,49 +257,116 @@ const AddProducts = () => {
               </Select>
             </FormControl>
           </Grid2>
+
+          {/* main category */}
           <Grid2 size={{ xs: 12, md: 4, lg: 4 }}>
             <FormControl
               fullWidth
-              error={formik.touched.sizes && Boolean(formik.errors.sizes)}
+              error={formik.touched.category && Boolean(formik.errors.category)}
               required
             >
-              <InputLabel id="sizes-label">Category</InputLabel>
+              <InputLabel id="category-label">Category</InputLabel>
               <Select
-                labelId="sizes-label"
-                id="sizes"
-                name="sizes"
-                value={formik.values.sizes}
-                label="Sizes"
+                labelId="category-label"
+                id="category"
+                name="category"
+                value={formik.values.category}
+                label="Category"
+                onChange={formik.handleChange}
+              >
+                {/* <MenuItem value="">
+                  <em>None</em>
+                </MenuItem> */}
+                {mainCategory.map((item) => (
+                    <MenuItem value={item.categoryId}>{item.name}</MenuItem>
+                  ))}
+              </Select>
+              {formik.touched.category && formik.errors.category && (
+                <FormHelperText>{formik.errors.category}</FormHelperText>
+              )}
+            </FormControl>
+          </Grid2>
+
+          {/* second category */}
+          <Grid2 size={{ xs: 12, md: 4, lg: 4 }}>
+            <FormControl
+              fullWidth
+              error={formik.touched.category && Boolean(formik.errors.category)}
+              required
+            >
+              <InputLabel id="category2-label">Second Category</InputLabel>
+              <Select
+                labelId="category2-label"
+                id="category2"
+                name="category2"
+                value={formik.values.category2}
+                label="Second Category"
+                onChange={formik.handleChange}
+              >
+                {/* <MenuItem value="">
+                  <em>None</em>
+                </MenuItem> */}
+                {formik.values.category &&
+                  categoryTwo[formik.values.category].map((item) => (
+                    <MenuItem value={item.categoryId}>{item.name}</MenuItem>
+                  ))}
+              </Select>
+              {formik.touched.category && formik.errors.category && (
+                <FormHelperText>{formik.errors.category}</FormHelperText>
+              )}
+            </FormControl>
+          </Grid2>
+
+          {/* third category */}
+          <Grid2 size={{ xs: 12, md: 4, lg: 4 }}>
+            <FormControl
+              fullWidth
+              error={formik.touched.category && Boolean(formik.errors.category)}
+              required
+            >
+              <InputLabel id="category-label">Third Category</InputLabel>
+              <Select
+                labelId="category-label"
+                id="category3"
+                name="category3"
+                value={formik.values.category3}
+                label="Third Category"
                 onChange={formik.handleChange}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value="FREE">FREE </MenuItem>
-                <MenuItem value="S">S </MenuItem>
-                <MenuItem value="M">M </MenuItem>
-                <MenuItem value="L">L </MenuItem>
-                <MenuItem value="XL">XL </MenuItem>
-
-                {/* {colors.map((color,index)=><MenuItem value={color.name}>
-            <div className="flexx gap-3>">
-              <span style={{backgroundColor:color.hex}} className={`h-5 w-5 rounded-full ${color.name==="white" ? "border":""}`}></span>
-              <p>{color.name}</p></div></MenuItem>)} */}
+                {formik.values.category2 &&
+                  childCategory(
+                    categoryThree[formik.values.category],
+                    formik.values.category2
+                  )?.map((item: any) => (
+                    <MenuItem value={item.categoryId}>{item.name}</MenuItem>
+                  ))}
               </Select>
+              {formik.touched.category && formik.errors.category && (
+                <FormHelperText>{formik.errors.category}</FormHelperText>
+              )}
             </FormControl>
           </Grid2>
-
-
+{/* button */}
           <Grid2 size={{ xs: 12 }}>
-          <Button 
-          variant="contained" 
-          fullWidth 
-          sx={{p:"14px"}}
-          color="primary"
-          type="submit">
-           {false? <CircularProgress size="small"
-           sx={{width:"27px",height:"27px"}}/>:"Add Product"}
-          </Button>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ p: "14px" }}
+              color="primary"
+              type="submit"
+            >
+              {false ? (
+                <CircularProgress
+                  size="small"
+                  sx={{ width: "27px", height: "27px" }}
+                />
+              ) : (
+                "Add Product"
+              )}
+            </Button>
           </Grid2>
         </Grid2>
       </form>
