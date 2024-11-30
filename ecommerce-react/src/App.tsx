@@ -27,7 +27,8 @@ function App() {
       <Route path='/become-seller' element={<BecomeSeller/>}/>
       <Route path='/seller/*' element={<SellerDashBoard/>}/>
       <Route path='/admin/*' element={<AdminDashboard/>}/>
-      <Route path='/admin/*' element={ <ProductDetails />}/>
+      <Route path='/productDetails' element={ <ProductDetails />}/>
+      <Route path='/product' element={ <Product />}/>
 
      </Routes>
 
