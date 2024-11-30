@@ -10,32 +10,49 @@ import { electronicsLevelThree } from '../../data/category/level three/electroni
 import { Box, dividerClasses } from '@mui/material'
 
 
-const categoryTwo = {
-women:womenLevelTwo,
-men:menLevelTwo,
-home_furniture:furnitureLevelTwo,
-electronics:electronicsLevelTwo,
+const categoryTwo:{[key:string]:any[]} = {
+    women: womenLevelTwo,
+    men: menLevelTwo,
+    home_furniture: furnitureLevelTwo,
+    electronics: electronicsLevelTwo,
 }
-const categoryThree = {
-    women:womenLevelThree,
-    men:menLevelThree,
-    home_furniture:furnitureLevelThree,
-    electronics:electronicsLevelThree,
+const categoryThree:{[key:string]:any[]} = {
+    women: womenLevelThree,
+    men: menLevelThree,
+    home_furniture: furnitureLevelThree,
+    electronics: electronicsLevelThree,
 
 }
 
 
-const CategorySheet = () => {
-  return (
-  <Box className="bg-white shadow-lg lg:h-[500px] overflow-y-auto">
-<div className='flex text-sm flex-wrap'>
-{categoryTwo["women"]?.map((item) =><div>
-    <p className='text-primary-color mb-5 font-semibold'>{item.name}</p>
-</div>)}
+const CategorySheet = ({selectedCategory,setShowSheet}:any) => {
 
-</div>
-  </Box>
-  )
+    const childCategory = (category: any, parentCategoryId: any) => {
+        return category.filter((child: any) => child.parentCategoryId === parentCategoryId)
+    }
+    return (
+        <Box sx={{ zIndex: 2 }}
+            className="bg-white shadow-lg lg:h-[200px] overflow-y-auto">
+            <div className='flex text-sm flex-wrap'>
+                {categoryTwo[selectedCategory]?.map((item:any,index) => <div
+                className={`p-8 lg:w-[20%] ${index % 2 === 0 ? "bg-slate-50":"bg-white"}`}
+                >
+                    <p className='text-primary-color mb-5 font-semibold'>{item.name}</p>
+                    <ul className='space-y-3'>
+                        {childCategory(categoryThree[selectedCategory], item.categoryId).map((item:any) => <div>
+                            <li className='hover:text-primary-color cursor-pointer'>
+                                {item.name}
+                            </li>
+                        </div>)}
+
+
+                    </ul>
+
+                </div>)}
+
+            </div>
+        </Box>
+    )
 }
 
 export default CategorySheet
