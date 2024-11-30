@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.css';
 import './App.css';
 import { Button, ThemeProvider } from '@mui/material';
@@ -14,8 +14,19 @@ import SellerDashBoard from './seller/pages/SellerDashBoard/SellerDashBoard';
 import AdminDashboard from './admin/pages/AdminDashboard/AdminDashboard';
 import Product from './customer/pages/Product/Product';
 import ProductDetails from './customer/pages/Page Details/ProductDetails';
+import { fetchProduct } from './state/fetchProduct';
+import { useAppDispatch } from './state/store';
+import { fetchSellerProfile } from './state/seller/sellerSlice';
 
 function App() {
+const dispatch=useAppDispatch();
+
+
+   useEffect(()=>{
+  dispatch(fetchSellerProfile(localStorage.getItem("jwt")||""))
+   },[])
+
+
   return (
 
   <ThemeProvider theme={customeTheme}>
