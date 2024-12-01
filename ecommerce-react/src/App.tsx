@@ -50,8 +50,8 @@ const navigate=useNavigate()
       <Route path='/become-seller' element={<BecomeSeller/>}/>
       <Route path='/seller/*' element={<SellerDashBoard/>}/>
       <Route path='/admin/*' element={<AdminDashboard/>}/>
-      <Route path='/productDetails' element={ <ProductDetails />}/>
-      <Route path='/product' element={ <Product />}/>
+      <Route path='/product-details' element={ <ProductDetails />}/>
+      <Route path='/products/:category' element={ <Product />}/>
 
      </Routes>
 
