@@ -17,11 +17,13 @@ import ProductDetails from './customer/pages/Page Details/ProductDetails';
 import { fetchProduct } from './state/fetchProduct';
 import { useAppDispatch, useAppSelector } from './state/store';
 import { fetchSellerProfile } from './state/seller/sellerSlice';
+import { useSelector } from 'react-redux';
 
 function App() {
 const dispatch=useAppDispatch();
 const {seller}=useAppSelector(store=>store);
 const navigate=useNavigate()
+
 
 
    useEffect(()=>{
@@ -33,6 +35,8 @@ const navigate=useNavigate()
     navigate("/seller")
    }
      },[seller.profile])
+
+
 
 
   return (
