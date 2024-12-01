@@ -3,11 +3,12 @@ import './ProductCard.css'
 import { Button } from '@mui/material'
 import { Favorite, ModeComment } from '@mui/icons-material'
 import { teal } from '@mui/material/colors'
-const images=[
-    "https://images.pexels.com/photos/4715341/pexels-photo-4715341.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    "https://images.pexels.com/photos/3992188/pexels-photo-3992188.jpeg?auto=compress&cs=tinysrgb&w=1200",
-]
-const ProductCard = () => {
+import { Product } from '../../../types/ProductTypes'
+// const images=[
+//     "https://images.pexels.com/photos/4715341/pexels-photo-4715341.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+//     "https://images.pexels.com/photos/3992188/pexels-photo-3992188.jpeg?auto=compress&cs=tinysrgb&w=1200",
+// ]
+const ProductCard = ({item}:{item:Product}) => {
   const [currentImage, setCurrentImage] = useState(0)
   const [isHovered, setIsHovered] = useState(false);
 
@@ -16,7 +17,7 @@ const ProductCard = () => {
     let interval: any
     if(isHovered){
       interval=setInterval(() => {
-        setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+        setCurrentImage((prevImage) => (prevImage + 1) % item.images.length);
       }, 1000);
     }
     else if(interval){
@@ -33,11 +34,14 @@ const ProductCard = () => {
         onMouseEnter={()=>setIsHovered(true)}
         onMouseLeave={()=>setIsHovered(false)}
         >
-            {images.map((item,index) => <img
+            {item.images.map((item,index) => <img
+            key={index}
             className='card-media object-top'
             src={item} alt=""
             style={{transform: `translateX(${(index-currentImage)* 100}%)`}}
             />)}
+            console.log(item.images);
+
 
            {isHovered && <div className='indicator flex flex-col items-center space-y-2'>
 <div className='flex gap-3'>

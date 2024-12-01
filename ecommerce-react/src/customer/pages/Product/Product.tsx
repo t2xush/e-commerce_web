@@ -5,7 +5,7 @@ import { Divider, FormControl, IconButton, InputLabel, MenuItem, Select, useMedi
 import { Box } from '@mui/system'
 import { FilterAlt } from '@mui/icons-material'
 import { useActionData, useParams, useSearchParams } from 'react-router-dom'
-import { useAppDispatch } from '../../../state/store'
+import { useAppDispatch, useAppSelector } from '../../../state/store'
 import { fetchAllProducts } from '../../../state/customer/ProductSlice'
 
 
@@ -17,6 +17,7 @@ const Product = () => {
     const dispatch=useAppDispatch()
     const [searchParam,setSearchParam]=useSearchParams()
     const{category}=useParams();
+    const{product}=useAppSelector((store=>store))
 
     const handleSortChange = (event: any) => {
         setSort(event.target.value);
@@ -68,7 +69,7 @@ const Product = () => {
                     <Divider />
                     <section className='products_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center'>
                         
-                        {[1, 1, 1, 1].map((item) => <ProductCard />)}
+                        {product.products.map((item) => <ProductCard item={item} />)}
                     </section>
 
                 </div>

@@ -61,6 +61,8 @@ export const fetchAllProducts=createAsyncThunk<any,any>("products/fetchAllProduc
             });
             const data=response.data;
             console.log("all  products data: " ,data)
+            
+
             return data
         }
         catch (error:any){
@@ -117,7 +119,7 @@ const productSlice=createSlice({
         })
         builder.addCase(fetchAllProducts.fulfilled,(state,action)=>{
             state.loading=false;
-            state.product=action.payload;
+            state.products=action.payload.content;
         })
         builder.addCase(fetchAllProducts.rejected,(state,action)=>{
             state.loading=false;
