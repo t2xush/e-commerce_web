@@ -7,9 +7,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useAppDispatch } from '../../../state/store';
+import { useAppDispatch, useAppSelector } from '../../../state/store';
 import { useEffect } from 'react';
 import { fetchSellerProducts } from '../../../state/seller/sellerProductSlice';
+import { Product } from '../../../types/ProductTypes';
+import { Button } from '@mui/material';
+import { Edit } from '@mui/icons-material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -51,6 +54,7 @@ const rows = [
 
 export default function ProductTable() {
   const dispatch=useAppDispatch();
+  const {sellerProduct}=useAppSelector(store=>store);
 
   useEffect(()=>{
     dispatch(fetchSellerProducts(localStorage.getItem("jwt")))
@@ -65,7 +69,7 @@ export default function ProductTable() {
         <TableHead>
           <TableRow>
             <StyledTableCell>Images</StyledTableCell>
-            <StyledTableCell>Title</StyledTableCell>
+            <StyledTableCell align="right">Title</StyledTableCell>
             <StyledTableCell align="right">MRP</StyledTableCell>
             <StyledTableCell align="right">Selling Price</StyledTableCell>
             <StyledTableCell align="right">Color</StyledTableCell>
@@ -75,18 +79,30 @@ export default function ProductTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {sellerProduct.products.map((item:Product) => (
+            <StyledTableRow key={item.id}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                <div className='flex gap-1 flex-wrap'>
+                  {item.images.map((image)=>< img className='w-20 rounded-md' alt='' src={image}/>)}
+
+                </div>
+               
               </StyledTableCell>
-              <StyledTableCell >{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
+              <StyledTableCell align="right">{item.title}</StyledTableCell>
+              <StyledTableCell align="right">{item.mrpPrice}</StyledTableCell>
+              <StyledTableCell align="right">{item.sellingPrice}</StyledTableCell>
+              <StyledTableCell align="right">{item.color}</StyledTableCell>
+              <StyledTableCell align="right">{
+                <Button size='small'>
+                  in_stock</Button>
+                  }</StyledTableCell>
+                    <StyledTableCell align="right">{
+                <Button size='small'>
+                  <Edit/>
+                  </Button>
+                  }</StyledTableCell>
             </StyledTableRow>
+            
           ))}
         </TableBody>
       </Table>
