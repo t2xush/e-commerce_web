@@ -12,7 +12,6 @@ import { uploadToCloudinary } from "../../../Util/uploadToCloudinary";
 import {
   Button,
   CircularProgress,
-  colors,
   FormControl,
   FormHelperText,
   Grid2,
@@ -24,6 +23,9 @@ import {
 } from "@mui/material";
 import { AddPhotoAlternate, Close, Label } from "@mui/icons-material";
 import { mainCategory } from "../../../customer/data/category/mainCategory";
+import { color } from "../../../customer/data/Filter/color";
+import { useAppDispatch } from "../../../state/store";
+import { createProduct } from "../../../state/seller/sellerProductSlice";
 
 const categoryTwo: { [key: string]: any[] } = {
   men: menLevelTwo,
@@ -44,6 +46,9 @@ const categoryThree: { [key: string]: any[] } = {
 
 const AddProducts = () => {
   const [uploadingImage, setUploadingImage] = useState(false);
+  const dispatch=useAppDispatch();
+
+
 
   const formik = useFormik({
     initialValues: {
@@ -61,6 +66,7 @@ const AddProducts = () => {
     },
     onSubmit: (values) => {
       console.log(values);
+      dispatch(createProduct({request:values,jwt:localStorage.getItem("jwt")}))
     },
   });
 
@@ -217,12 +223,12 @@ const AddProducts = () => {
                 <MenuItem value="">
                   <em>none</em>
                 </MenuItem>
-                <MenuItem value="FREE">FREE </MenuItem>
+              
 
-                {/* {colors.map((color,index)=><MenuItem value={color.name}>
+                {color.map((color,index)=><MenuItem value={color.name}>
             <div className="flexx gap-3>">
               <span style={{backgroundColor:color.hex}} className={`h-5 w-5 rounded-full ${color.name==="white" ? "border":""}`}></span>
-              <p>{color.name}</p></div></MenuItem>)} */}
+              <p>{color.name}</p></div></MenuItem>)}
               </Select>
             </FormControl>
           </Grid2>
