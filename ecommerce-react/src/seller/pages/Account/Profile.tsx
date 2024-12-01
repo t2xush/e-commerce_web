@@ -6,6 +6,7 @@ import PersonalDetails from "./PersonalDetails";
 import BusinessDetails from "./BusinessDetails";
 import PickupAddress from "./PickupAddress";
 import BankDetails from "./BankDetails";
+import { useAppSelector } from "../../../state/store";
 
 
 
@@ -22,6 +23,7 @@ const style = {
 };
 const Profile = () => {
   const [open, setOpen] = React.useState(false);
+  const {seller}=useAppSelector(store=>store);
   const handleOpen = (formName:string) => {
     setOpen(true);
     setSelectedForm(formName);
@@ -62,11 +64,11 @@ const Profile = () => {
         <div>
           <Avatar sx={{width:"10rem",height:"10rem"}} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMGJjQE6IYjUPC2nxSFbDnEqIjMKR03q97Sg&s"/>
           <div>
-            <ProfileFieldCard keys='Seller Name'value='sara'/>
+            <ProfileFieldCard keys='Seller Name'value={seller.profile?.sellerName}/>
             <Divider/>
-            <ProfileFieldCard keys='Seller Email'value='sara@gmail.com'/>
+            <ProfileFieldCard keys='Seller Email'value={seller.profile?.email}/>
             <Divider/>
-            <ProfileFieldCard keys='Seller Mobile'value='0448274855'/>
+            <ProfileFieldCard keys='Seller Mobile'value={seller.profile?.mobile}/>
 
           </div>
         </div>
@@ -87,11 +89,13 @@ const Profile = () => {
         <div>
           
           <div>
-            <ProfileFieldCard keys='Business Name/Brand Name'value='sara clothing'/>
+            <ProfileFieldCard keys='Business Name/Brand Name'value={seller.profile?.businessDetails
+.businessName}/>
             <Divider/>
-            <ProfileFieldCard keys='GSTIN'value='GSTIN82495'/>
+            <ProfileFieldCard keys='GSTIN'value={seller.profile?.gstin||"not provided"}/>
             <Divider/>
-            <ProfileFieldCard keys='Account Status'value='PENDING'/>
+            <ProfileFieldCard keys='Account Status'value={seller.profile?.accountStatus
+}/>
 
           </div>
         </div>
@@ -112,13 +116,13 @@ const Profile = () => {
         <div>
         
           <div>
-            <ProfileFieldCard keys='Address'value='random address'/>
+            <ProfileFieldCard keys='Address'value={seller.profile?.pickupAddress.address||"not provided"}/>
             <Divider/>
-            <ProfileFieldCard keys='City'value='Oulu'/>
+            <ProfileFieldCard keys='City'value={seller.profile?.pickupAddress.city}/>
             <Divider/>
-            <ProfileFieldCard keys='state'value='state'/>
+            <ProfileFieldCard keys='state'value={seller.profile?.pickupAddress.state}/>
             <Divider/>
-            <ProfileFieldCard keys='Mobile'value='0487246274'/>
+            <ProfileFieldCard keys='Mobile'value={seller.profile?.pickupAddress.mobile||"not provided"}/>
 
           </div>
         </div>
@@ -139,11 +143,12 @@ const Profile = () => {
         <div>
           
           <div>
-            <ProfileFieldCard keys='Account Holder Name'value='sara'/>
+            <ProfileFieldCard keys='Account Holder Name'value={seller.profile?.bankDetails.accountHolderName}/>
             <Divider/>
-            <ProfileFieldCard keys='Account Number'value='328472'/>
+            <ProfileFieldCard keys='Account Number'value={seller.profile?.bankDetails.accountNumber}/>
             <Divider/>
-            <ProfileFieldCard keys='IFSC CODE'value='FI3258'/>
+            <ProfileFieldCard keys='IFSC CODE'value={seller.profile?.bankDetails.ifscCode
+}/>
 
           </div>
         </div>
