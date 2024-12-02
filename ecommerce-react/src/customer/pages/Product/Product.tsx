@@ -24,9 +24,17 @@ const Product = () => {
     };
 
     useEffect(()=>{
-        const [minPrice,maxPrice]=searchParam.get('price')?.split("-") || [];
-        dispatch(fetchAllProducts({category}))
-    },[category])
+        const [miniPrice,maxPrice]=searchParam.get('price')?.split("-") || [];
+        const color=searchParam.get("color");
+      const  miniDiscount=searchParam.get("discount")?Number(searchParam.get("discount")):undefined;
+
+
+    // const newFilter={
+    //     color:color||""
+    // }
+
+        dispatch(fetchAllProducts({}))
+    },[category,searchParam])
 
 
     return (

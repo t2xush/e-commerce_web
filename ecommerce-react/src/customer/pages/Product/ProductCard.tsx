@@ -30,17 +30,17 @@ const ProductCard = ({item}:{item:Product}) => {
   
   return (
     <div className='group px-4 relative'>
-        <div className='card'
+        <div className='card '
         onMouseEnter={()=>setIsHovered(true)}
         onMouseLeave={()=>setIsHovered(false)}
         >
             {item.images.map((item,index) => <img
             key={index}
-            className='card-media object-top'
+            className='card-media object-top '
             src={item} alt=""
             style={{transform: `translateX(${(index-currentImage)* 100}%)`}}
             />)}
-            console.log(item.images);
+           
 
 
            {isHovered && <div className='indicator flex flex-col items-center space-y-2'>
@@ -59,19 +59,19 @@ const ProductCard = ({item}:{item:Product}) => {
         </div>
         <div className='details pt-3 space-y-1 group-hover-effect rounded-mad'>
 <div className='name'>
-  <h1>Niky</h1>
-<p>Children Socks</p>
+  <h1>{item.seller?.businessDetails.businessName}</h1>
+<p>{item.title}</p>
 
 </div>
 <div className='price flex items-center gap-3' >
 <span className='font-sans text-gray-800'>
-  € 4.0
+  € {item.sellingPrice}
 </span>
 <span className='thin-line-through text-gray-400'>
-  € 9.9
+  € {item.mrpPrice}
 </span>
 <span className='text-primary-color font-semibold'>
-  60%
+{item.discountPercent}%
 </span>
 
 </div>
