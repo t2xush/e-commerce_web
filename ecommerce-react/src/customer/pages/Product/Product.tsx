@@ -24,16 +24,24 @@ const Product = () => {
     };
 
     useEffect(()=>{
-        const [miniPrice,maxPrice]=searchParam.get('price')?.split("-") || [];
+        const [minPrice,maxPrice]=searchParam.get('price')?.split("-") || [];
         const color=searchParam.get("color");
+
       const  miniDiscount=searchParam.get("discount")?Number(searchParam.get("discount")):undefined;
 
 
-    // const newFilter={
-    //     color:color||""
-    // }
 
-        dispatch(fetchAllProducts({}))
+    const newFilter={
+        color:color||"",
+        minPrice:minPrice? Number(minPrice):undefined,
+        maxPrice:maxPrice? Number(maxPrice):undefined,
+        miniDiscount,
+
+    }
+
+    console.log(newFilter)
+
+        dispatch(fetchAllProducts(newFilter))
     },[category,searchParam])
 
 
