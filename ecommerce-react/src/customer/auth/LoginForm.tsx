@@ -39,7 +39,7 @@ const LoginForm = () => {
           />
            
        {true &&
-       <div className="space-y-2">  
+       <div className="space-y-3">  
        <p className="font-medium text-sm opacity-60">Enter OTP sent to your email</p>
        <TextField
             fullWidth
