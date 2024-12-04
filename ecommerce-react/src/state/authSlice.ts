@@ -19,7 +19,7 @@ export const signin=createAsyncThunk<any,any>("/auth/signin",
     async(loginRequest,{rejectWithValue})=>{
         try{
             const response=await api.post("/auth/signing",loginRequest)
-            console.log("login", response.data)
+            console.log("login success", response.data)
 
         }catch(error:any){
             console.log("error:",error)

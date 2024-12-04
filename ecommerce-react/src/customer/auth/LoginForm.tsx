@@ -2,7 +2,7 @@ import React from 'react'
 import { useAppDispatch } from '../../state/store';
 import { useFormik } from 'formik';
 import { Button, TextField } from '@mui/material';
-import { sendLoginSignupOtp } from '../../state/authSlice';
+import { sendLoginSignupOtp, signin } from '../../state/authSlice';
 
 const LoginForm = () => {
     const dispatch=useAppDispatch();
@@ -14,7 +14,7 @@ const LoginForm = () => {
         },
         onSubmit:(values)=>{
             console.log("form data ",values)
-            // dispatch(sellersignin({email:values.email,otp:values.otp}))
+          dispatch(signin(values))
         }
 
     })
