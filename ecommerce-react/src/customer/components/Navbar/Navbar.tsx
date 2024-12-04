@@ -12,6 +12,7 @@ import zIndex from '@mui/material/styles/zIndex';
 import { mainCategory } from '../../data/category/mainCategory';
 
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../state/store';
 
 
 const Navbar = () => {
@@ -20,6 +21,7 @@ const Navbar = () => {
   const [selectedCategory,setSelectedCategory] = useState("women");
   const [showCategorySheet,setShowCategorySheet] = useState(false);
   const navigate=useNavigate()
+  const {auth}=useAppSelector(store=>store)
 
   return (
     <div>
@@ -55,12 +57,19 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
+            
+
             {
-             false ? <Button className='flex items-center gap-2'>
+             auth.isLoggedIn ? <Button
+              // onClick={()=>navigate("/seller")}
+              className='flex items-center gap-2'>
             <Avatar 
             sx={{ width: 29, height: 29 }}
             src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMGJjQE6IYjUPC2nxSFbDnEqIjMKR03q97Sg&s' />
-              <h1 className='font-semibold hidden lg:block'>Gao</h1>
+              <h1 className='font-semibold hidden lg:block'>
+                {auth.user?.fullName}
+              </h1>
+             
               </Button> : <Button onClick={()=>navigate("/login")} variant='contained'>Login</Button>
             }
             <IconButton>

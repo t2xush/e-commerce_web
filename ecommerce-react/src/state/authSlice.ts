@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../config/Api";
+import { User } from "../types/userTypes";
 
 
 
@@ -56,7 +57,7 @@ export const fetchUserProfile=createAsyncThunk<any,any>("/auth/fetchUserProfile"
              })
             console.log("fetch customer profile  success", response.data)
             // localStorage.setItem("jwt",response.data.jwt)
-            return response.data.jwt;
+            return response.data;
 
         }catch(error:any){
             console.log("error:",error)
@@ -86,7 +87,7 @@ interface AuthState{
     jwt:string |null,
     otpSent:boolean,
     isLoggedIn:boolean,
-    user:any |null,
+    user:User |null,
     loading:boolean
 
 }
