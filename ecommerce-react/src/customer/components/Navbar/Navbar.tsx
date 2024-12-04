@@ -56,12 +56,12 @@ const Navbar = () => {
               <SearchIcon />
             </IconButton>
             {
-             true ? <Button className='flex items-center gap-2'>
+             false ? <Button className='flex items-center gap-2'>
             <Avatar 
             sx={{ width: 29, height: 29 }}
             src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMGJjQE6IYjUPC2nxSFbDnEqIjMKR03q97Sg&s' />
               <h1 className='font-semibold hidden lg:block'>Gao</h1>
-              </Button> : <Button variant='contained'>Login</Button>
+              </Button> : <Button onClick={()=>navigate("/login")} variant='contained'>Login</Button>
             }
             <IconButton>
               <FavoriteBorder sx={{fontSize:29}}/>
