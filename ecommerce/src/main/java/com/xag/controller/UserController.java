@@ -15,7 +15,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/users/profile")
+    @GetMapping("/api/users/profile")
     public ResponseEntity<User> sentOtpHandler(
             @RequestHeader("Authorization") String jwt)
         throws Exception{

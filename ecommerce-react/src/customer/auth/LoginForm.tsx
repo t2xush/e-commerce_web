@@ -1,11 +1,12 @@
 import React from 'react'
-import { useAppDispatch } from '../../state/store';
+import { useAppDispatch, useAppSelector } from '../../state/store';
 import { useFormik } from 'formik';
-import { Button, TextField } from '@mui/material';
+import { Button, CircularProgress, TextField } from '@mui/material';
 import { sendLoginSignupOtp, signin } from '../../state/authSlice';
 
 const LoginForm = () => {
     const dispatch=useAppDispatch();
+    const {auth}=useAppSelector(store=>store)
 
     const formik=useFormik({
         initialValues:{
@@ -51,14 +52,25 @@ const LoginForm = () => {
             helperText={formik.touched.otp && formik.errors.otp}
           />
           </div>}
-          <Button onClick={handleSendOtp}fullWidth variant='contained' sx={{py:"10px"}}>
-           Send Otp
+
+          {auth.otpSent?  <Button onClick={()=>formik.handleSubmit()}
+           fullWidth variant='contained' sx={{py:"10px"}}>
+            Login
+          </Button> : <Button onClick={handleSendOtp}fullWidth variant='contained' sx={{py:"10px"}}>
+           {auth.loading? <CircularProgress/> :  "Send Otp"}
+          
+          
+          </Button> }
+          {/* <Button onClick={handleSendOtp}fullWidth variant='contained' sx={{py:"10px"}}>
+           {auth.loading? <CircularProgress/> :  "Send Otp"}
+          
+          
           </Button>
 
           <Button onClick={()=>formik.handleSubmit()}
            fullWidth variant='contained' sx={{py:"10px"}}>
             Login
-          </Button>
+          </Button> */}
       
 
 

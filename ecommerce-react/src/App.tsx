@@ -20,10 +20,11 @@ import { fetchSellerProfile } from './state/seller/sellerSlice';
 import { useSelector } from 'react-redux';
 import LoginForm from './customer/auth/LoginForm';
 import Auth from './customer/auth/Auth';
+import { fetchUserProfile } from './state/authSlice';
 
 function App() {
 const dispatch=useAppDispatch();
-const {seller}=useAppSelector(store=>store);
+const {seller,auth}=useAppSelector(store=>store);
 const navigate=useNavigate()
 
 
@@ -38,6 +39,10 @@ const navigate=useNavigate()
    }
      },[seller.profile])
 
+    useEffect(()=>{
+      // dispatch(fetchUserProfile(localStorage.getItem("jwt")||""))
+      dispatch(fetchUserProfile({jwt: auth.jwt||localStorage.getItem("jwt")}))
+    },[auth.jwt])
 
 
 
