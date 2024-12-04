@@ -8,6 +8,8 @@ import { menLevelThree } from '../../data/category/level three/menLevelThree'
 import { furnitureLevelThree } from '../../data/category/level three/furnitureLevelThree'
 import { electronicsLevelThree } from '../../data/category/level three/electronicsLevelThree'
 import { Box, dividerClasses } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+
 
 
 const categoryTwo:{[key:string]:any[]} = {
@@ -26,6 +28,7 @@ const categoryThree:{[key:string]:any[]} = {
 
 
 const CategorySheet = ({selectedCategory,setShowSheet}:any) => {
+    const navigate=useNavigate()
 
     const childCategory = (category: any, parentCategoryId: any) => {
         return category.filter((child: any) => child.parentCategoryId === parentCategoryId)
@@ -40,7 +43,10 @@ const CategorySheet = ({selectedCategory,setShowSheet}:any) => {
                     <p className='text-primary-color mb-5 font-semibold'>{item.name}</p>
                     <ul className='space-y-3'>
                         {childCategory(categoryThree[selectedCategory], item.categoryId).map((item:any) => <div>
-                            <li className='hover:text-primary-color cursor-pointer'>
+                            <li 
+                               onClick={()=>navigate("/products/"+item.categoryId)}
+                            className='hover:text-primary-color cursor-pointer'
+                            >
                                 {item.name}
                             </li>
                         </div>)}

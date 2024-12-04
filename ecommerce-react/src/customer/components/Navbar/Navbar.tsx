@@ -40,7 +40,9 @@ const Navbar = () => {
                 onMouseEnter={()=>{
                   setShowCategorySheet(true);
                   setSelectedCategory(item.categoryId);
+                 
                 }}
+               
                className='mainCategory hover:text-primary-color
                hover:border-b-2 h-[70px] px-4 border-primary-color
                flex items-center'>

@@ -8,7 +8,7 @@ const API_URL="/products";
 
 
 export const fetchProductById=createAsyncThunk("products/fetchProductById",
-    async(productId,{rejectWithValue})=>{
+    async(productId:number,{rejectWithValue})=>{
         try{
             const response=await api.get(`${API_URL}/${productId}`);
             const data=response.data;
@@ -134,7 +134,7 @@ const productSlice=createSlice({
         })
         builder.addCase(searchProduct.fulfilled,(state,action)=>{
             state.loading=false;
-            state.product=action.payload;
+            state.searchProduct=action.payload;
         })
         builder.addCase(searchProduct.rejected,(state,action)=>{
             state.loading=false;
