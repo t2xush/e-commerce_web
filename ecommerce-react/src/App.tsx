@@ -14,6 +14,8 @@ import SellerDashBoard from './seller/pages/SellerDashBoard/SellerDashBoard';
 import AdminDashboard from './admin/pages/AdminDashboard/AdminDashboard';
 import Product from './customer/pages/Product/Product';
 import ProductDetails from './customer/pages/Page Details/ProductDetails';
+import Cart from './admin/pages/Cart/Cart';
+import Checkout from './admin/pages/Checkout/Checkout';
 import { fetchProduct } from './state/fetchProduct';
 import { useAppDispatch, useAppSelector } from './state/store';
 import { fetchSellerProfile } from './state/seller/sellerSlice';
@@ -58,6 +60,9 @@ const navigate=useNavigate()
       <Route path='/become-seller' element={<BecomeSeller/>}/>
       <Route path='/seller/*' element={<SellerDashBoard/>}/>
       <Route path='/admin/*' element={<AdminDashboard/>}/>
+     
+      <Route path='Cart' element={ <Cart />}/>
+       <Route path='Checkout' element={<Checkout />}/>
       <Route path='/product-details/:categoryId/:name/:productId' element={ <ProductDetails />}/>
       <Route path='/products/:category' element={ <Product />}/>
 
