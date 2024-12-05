@@ -6,7 +6,7 @@ import { Box } from '@mui/system'
 import { FilterAlt } from '@mui/icons-material'
 import { useActionData, useParams, useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
-import { fetchAllProducts } from '../../../state/customer/ProductSlice'
+import { fetchAllProducts } from '../../../state/customer/productSlice'
 
 
 const Product = () => {

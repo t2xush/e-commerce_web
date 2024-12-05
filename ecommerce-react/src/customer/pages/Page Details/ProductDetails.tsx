@@ -7,7 +7,7 @@ import Add from '@mui/icons-material/Add';
 import ReviewCard from '../Review/ReviewCard';
 import { useAppDispatch, useAppSelector } from '../../../state/store';
 import { useParams } from 'react-router-dom';
-import { fetchProductById } from '../../../state/customer/ProductSlice';
+import { fetchProductById } from '../../../state/customer/productSlice';
 
 
 
