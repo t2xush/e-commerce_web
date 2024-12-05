@@ -75,7 +75,7 @@ const Navbar = () => {
             <IconButton>
               <FavoriteBorder sx={{fontSize:29}}/>
             </IconButton>
-            <IconButton>
+            <IconButton onClick={()=>navigate("/Cart")}>
               <AddShoppingCart className='text-gray-700' sx={{fontSize:29}}/>
             </IconButton>
            {isLarge && <Button onClick={()=>navigate("/become-seller")}startIcon={
