@@ -4,6 +4,7 @@ import { api } from "../../config/Api";
 import { stat } from "fs";
 
 import { sumCartItemMrpPrice, sumCartItemSellingPrice } from "../../Util/sumCartItemMrpPrice";
+import { applyCoupon } from "./couponSlice";
 
 const API_URL="/api/cart";
 
@@ -166,9 +167,16 @@ const cartSlice=createSlice({
             state.error=action.payload as string;
 
         })
+        .addCase(applyCoupon.fulfilled,(state,action)=>{
+            state.loading=false;
+            state.cart=action.payload;
+        })
         
 
      
 
     }
 })
+
+export default cartSlice.reducer;
+export const {resertCartState}=cartSlice.actions;

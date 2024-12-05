@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CartItem from './CartItem'
 import { Close, LocalOffer } from '@mui/icons-material'
 import { teal } from '@mui/material/colors'
 import { Button, dividerClasses, Icon, IconButton, TextField } from '@mui/material'
 import PricingCard from './PricingCard'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../../../state/store'
+import { fetchUserCart } from '../../../state/customer/cartSlice'
 
 
 
@@ -12,6 +15,17 @@ const Cart = () => {
   const handleChange = (e: any) => {
     setCouponCode(e.target.value)
   }
+  const navigate=useNavigate()
+  const dispatch=useAppDispatch();
+
+
+  useEffect(()=>{
+    dispatch(fetchUserCart(localStorage.getItem("jwt") || ""))
+  },[])
+
+
+
+
   return (
     <div className='pt-10 px-5 sm:px-10 md:px-60 min-h-screen'>
 
