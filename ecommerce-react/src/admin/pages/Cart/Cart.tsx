@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import CartItem from './CartItem'
+import CartItemCard from './CartItem'
 import { Close, LocalOffer } from '@mui/icons-material'
 import { teal } from '@mui/material/colors'
 import { Button, dividerClasses, Icon, IconButton, TextField } from '@mui/material'
 import PricingCard from './PricingCard'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../../../state/store'
+import { useAppDispatch, useAppSelector } from '../../../state/store'
 import { fetchUserCart } from '../../../state/customer/cartSlice'
 
 
@@ -17,6 +17,8 @@ const Cart = () => {
   }
   const navigate=useNavigate()
   const dispatch=useAppDispatch();
+  const {cart}=useAppSelector(store=>store)
+
 
 
   useEffect(()=>{
@@ -32,7 +34,7 @@ const Cart = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className='cartItemSection lg:col-span-2 space-y-3'>
 
-          {[1, 1, 1, 1, 1, 1].map((item) => <CartItem />)}
+          {cart.cart?.cartItems.map((item) => <CartItemCard item={item}/>)}
 
 
         </div>

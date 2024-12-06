@@ -1,8 +1,10 @@
 import { Add, Close, Remove } from '@mui/icons-material'
 import { Button, Divider, IconButton } from '@mui/material'
 import React from 'react'
+import { CartItem } from '../../../types/CartTypes'
+import BusinessDetails from '../../../seller/pages/Account/BusinessDetails'
 
-const CartItem = () => {
+const CartItemCard = ({item}:{item:CartItem}) => {
 
   const handleUpdateQuantity = () => {
 
@@ -14,16 +16,16 @@ const CartItem = () => {
 
         <div>
 
-          <img className='w-[90px] rounded-md' src="https://images.pexels.com/photos/2821107/pexels-photo-2821107.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
+          <img className='w-[90px] rounded-md' src={item.product.images[0]} alt="" />
 
         </div>
 
         <div className="space-y-2">
-          <h1 className="font-semibold text-lg">Women Wool Coat</h1>
-          <p className='text-gray-600 font-medium text-sm'>Orange fabric three-dimensional cut women'coat</p>
-          <p className='text-gray-400 text-xs'><strong>Sold by : </strong>G&X Products Private Limited</p>
+          <h1 className="font-semibold text-lg">{item.product.title}</h1>
+          <p className='text-gray-600 font-medium text-sm'>{item.product.category?.categoryId}</p>
+          <p className='text-gray-400 text-xs'><strong>Sold by : </strong>{item.product.seller?.businessDetails.businessName}</p>
           <p className='text-sm'>7 days replacement available</p>
-          <p className='text-sm text-gray-500'><strong>quantity : </strong>5</p>
+          <p className='text-sm text-gray-500'><strong>quantity : </strong>{item.quantity}</p>
         </div>
 
 
@@ -40,7 +42,8 @@ const CartItem = () => {
               <Remove />
             </Button>
             <span>
-              {5}
+            {item.quantity}
+              {/* {5} */}
             </span>
             <Button onClick={handleUpdateQuantity}>
               <Add />
@@ -49,7 +52,7 @@ const CartItem = () => {
 
         </div>
         <div className='pr-5'>
-          <p className="text-gray-700 font-medium">€400</p>
+          <p className="text-gray-700 font-medium">€{item.sellingPrice}</p>
         </div>
       </div>
      
@@ -65,4 +68,4 @@ const CartItem = () => {
   )
 }
 
-export default CartItem
+export default CartItemCard
