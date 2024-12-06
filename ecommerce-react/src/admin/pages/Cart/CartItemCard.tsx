@@ -3,10 +3,19 @@ import { Button, Divider, IconButton } from '@mui/material'
 import React from 'react'
 import { CartItem } from '../../../types/CartTypes'
 import BusinessDetails from '../../../seller/pages/Account/BusinessDetails'
+import { useAppDispatch } from '../../../state/store'
+import { updateCartItem } from '../../../state/customer/cartSlice'
 
 const CartItemCard = ({item}:{item:CartItem}) => {
+  const dispatch=useAppDispatch()
 
-  const handleUpdateQuantity = () => {
+  const handleUpdateQuantity = (value:number) =>()=> {
+    dispatch(updateCartItem({jwt:localStorage.getItem("jwt"),
+      cartItemId:item.id,
+      cartItem:{quantity:item.quantity+value}
+    }))
+
+    
 
   }
   return (
@@ -38,14 +47,14 @@ const CartItemCard = ({item}:{item:CartItem}) => {
 
           <div className='flex items-center gap-2 w-[140px] justify-between'>
 
-            <Button onClick={handleUpdateQuantity} disabled={true}>
+            <Button onClick={handleUpdateQuantity(-1)} >
               <Remove />
             </Button>
             <span>
             {item.quantity}
               {/* {5} */}
             </span>
-            <Button onClick={handleUpdateQuantity}>
+            <Button onClick={handleUpdateQuantity(1)}>
               <Add />
             </Button>
           </div>

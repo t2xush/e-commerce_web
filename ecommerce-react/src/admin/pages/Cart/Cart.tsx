@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import CartItemCard from './CartItem'
+import CartItemCard from './CartItemCard'
 import { Close, LocalOffer } from '@mui/icons-material'
 import { teal } from '@mui/material/colors'
 import { Button, dividerClasses, Icon, IconButton, TextField } from '@mui/material'
