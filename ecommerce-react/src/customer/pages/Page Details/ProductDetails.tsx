@@ -16,7 +16,7 @@ import Add from "@mui/icons-material/Add";
 import ReviewCard from "../Review/ReviewCard";
 import { useAppDispatch, useAppSelector } from "../../../state/store";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchProductById } from "../../../state/customer/productSlice";
+import { fetchProductById } from "../../../state/customer/ProductSlice";
 import { addItemToCart } from "../../../state/customer/cartSlice";
 import { addProductToWishlist } from "../../../state/customer/wishlistSlice";
 

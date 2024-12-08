@@ -16,7 +16,7 @@ import { Box } from "@mui/system";
 import { FilterAlt } from "@mui/icons-material";
 import { useActionData, useParams, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../state/store";
-import { fetchAllProducts } from "../../../state/customer/productSlice";
+import { fetchAllProducts } from "../../../state/customer/ProductSlice";
 
 const Product = () => {
   const theme = useTheme();
