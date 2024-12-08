@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from '../../state/store';
 import { useFormik } from 'formik';
-import { sendLoginSignupOtp } from '../../state/authSlice';
+import { sendLoginSignupOtp, signup } from '../../state/authSlice';
 import { Button, TextField } from '@mui/material';
 
 const SignupForm = () => {
@@ -15,7 +15,7 @@ const SignupForm = () => {
         },
         onSubmit:(values)=>{
             console.log("form data ",values)
-            // dispatch(sellersignin({email:values.email,otp:values.otp}))
+            dispatch(signup({email:values.email,otp:values.otp,fullName:values.fullName}))
         }
 
     })
