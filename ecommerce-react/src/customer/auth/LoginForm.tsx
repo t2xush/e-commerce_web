@@ -17,10 +17,19 @@ const LoginForm = () => {
         },
         onSubmit:(values)=>{
             console.log("form data ",values)
-          dispatch(signin(values))
+           dispatch(signin(values))
+          if(auth.isLoggedIn){
+            navigate('/')
+          }
         }
 
     })
+
+    useEffect(()=>{
+      if(auth.isLoggedIn){
+        navigate('/')
+      }
+    },[auth.isLoggedIn])
 
    
 
@@ -60,7 +69,7 @@ const LoginForm = () => {
           {auth.otpSent?  <Button onClick={()=>formik.handleSubmit()}
            fullWidth variant='contained' sx={{py:"10px"}}>
             Login
-          </Button> : <Button onClick={handleSendOtp}fullWidth variant='contained' sx={{py:"10px"}}>
+          </Button> : <Button onClick={handleSendOtp} fullWidth variant='contained' sx={{py:"10px"}}>
            {auth.loading? <CircularProgress/> :  "Send Otp"}
           
           
