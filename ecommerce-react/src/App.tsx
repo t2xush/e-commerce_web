@@ -23,6 +23,7 @@ import { useSelector } from 'react-redux';
 import LoginForm from './customer/auth/LoginForm';
 import Auth from './customer/auth/Auth';
 import { fetchUserProfile } from './state/authSlice';
+import Account from './admin/pages/Account/Account';
 
 function App() {
 const dispatch=useAppDispatch();
@@ -65,6 +66,7 @@ const navigate=useNavigate()
        <Route path='Checkout' element={<Checkout />}/>
       <Route path='/product-details/:categoryId/:name/:productId' element={ <ProductDetails />}/>
       <Route path='/products/:category' element={ <Product />}/>
+      <Route path='/account' element={<Account/>}/>
 
      </Routes>
 
