@@ -16,7 +16,7 @@ import Product from './customer/pages/Product/Product';
 import ProductDetails from './customer/pages/Page Details/ProductDetails';
 import Cart from './admin/pages/Cart/Cart';
 import Checkout from './admin/pages/Checkout/Checkout';
-import { fetchProduct } from './state/fetchProduct';
+
 import { useAppDispatch, useAppSelector } from './state/store';
 import { fetchSellerProfile } from './state/seller/sellerSlice';
 import { useSelector } from 'react-redux';

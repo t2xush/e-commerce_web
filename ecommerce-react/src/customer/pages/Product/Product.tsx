@@ -31,7 +31,7 @@ const Product = () => {
 
 
 
-    const newFilter={
+    const filters={
         color:color||"",
         minPrice:minPrice? Number(minPrice):undefined,
         maxPrice:maxPrice? Number(maxPrice):undefined,
@@ -39,9 +39,9 @@ const Product = () => {
 
     }
 
-    console.log(newFilter)
+    console.log(filters)
 
-        dispatch(fetchAllProducts(newFilter))
+        dispatch(fetchAllProducts({category,filters}))
     },[category,searchParam])
 
 
@@ -49,7 +49,11 @@ const Product = () => {
         <div className='-z-10 mt-10'>
             <div>
                 <h1 className='text-3xl text-center font-bold text-gray-700 pb-5 px-9
-              uppercase space-x-2'>women socks</h1>
+              uppercase space-x-2'>
+               
+                {category}
+                
+                </h1>
             </div>
             <div className='lg:flex'>
                 <section className='filter_section hidden lg:block w-[20%]'>

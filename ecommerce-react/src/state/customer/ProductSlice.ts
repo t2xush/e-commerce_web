@@ -49,13 +49,14 @@ export const searchProduct=createAsyncThunk("products/searchProduct",
 
 
 export const fetchAllProducts=createAsyncThunk<any,any>("products/fetchAllProducts",
-    async(params,{rejectWithValue})=>{
+    async({category,filters},{rejectWithValue})=>{
 
         try{
             const response=await api.get(`${API_URL}`,{
                 params:{
-                    ...params,
-                    pageNumber:params.pageNumber||0
+                    category:category,
+                    ...filters,
+                    pageNumber:filters.pageNumber||0
 
                 }
             });
@@ -119,7 +120,7 @@ const productSlice=createSlice({
         })
         builder.addCase(fetchAllProducts.fulfilled,(state,action)=>{
             state.loading=false;
-            state.products=action.payload.content;
+            state.products=action.payload.content|| [];
         })
         builder.addCase(fetchAllProducts.rejected,(state,action)=>{
             state.loading=false;
