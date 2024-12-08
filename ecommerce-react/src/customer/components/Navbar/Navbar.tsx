@@ -58,11 +58,13 @@ const Navbar = () => {
               <SearchIcon />
             </IconButton>
             
-<div onClick={()=>navigate('/account')}>
+<div >
             {
              auth.isLoggedIn ? <Button
               // onClick={()=>navigate("/seller")}
-              className='flex items-center gap-2'>
+              className='flex items-center gap-2'
+              onClick={()=>navigate('/account')}
+              >
             <Avatar 
             sx={{ width: 29, height: 29 }}
             src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMGJjQE6IYjUPC2nxSFbDnEqIjMKR03q97Sg&s' />
@@ -73,12 +75,32 @@ const Navbar = () => {
               </Button> : <Button onClick={()=>navigate("/login")} variant='contained'>Login</Button>
             }
 </div>
-            <IconButton onClick={()=>navigate("/wishlist")}>
+
+<div >
+            {
+             auth.isLoggedIn ? <IconButton onClick={()=>navigate("/wishlist")}>
+             <FavoriteBorder sx={{fontSize:29}}/>
+           </IconButton>: <IconButton onClick={()=>navigate("/login")}>
               <FavoriteBorder sx={{fontSize:29}}/>
             </IconButton>
-            <IconButton onClick={()=>navigate("/Cart")}>
+            }
+</div>
+
+<div >
+            {
+             auth.isLoggedIn ?  <IconButton onClick={()=>navigate("/Cart")}>
+             <AddShoppingCart className='text-gray-700' sx={{fontSize:29}}/>
+           </IconButton>:  <IconButton onClick={()=>navigate("/login")}>
               <AddShoppingCart className='text-gray-700' sx={{fontSize:29}}/>
             </IconButton>
+            }
+</div>
+
+      
+
+
+        
+
            {isLarge && <Button onClick={()=>navigate("/become-seller")}startIcon={
               <Storefront/>}
              variant='outlined'>Become Seller</Button>
