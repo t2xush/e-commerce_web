@@ -23,6 +23,7 @@ import { useSelector } from 'react-redux';
 import LoginForm from './customer/auth/LoginForm';
 import Auth from './customer/auth/Auth';
 import { fetchUserProfile } from './state/authSlice';
+import Wishlist from './customer/pages/Wishlist/Wishlist';
 
 function App() {
 const dispatch=useAppDispatch();
@@ -57,6 +58,9 @@ const navigate=useNavigate()
   <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/login' element={<Auth/>}/>
+      <Route path='/wishlist' element={<Wishlist/>}/>
+
+
       <Route path='/become-seller' element={<BecomeSeller/>}/>
       <Route path='/seller/*' element={<SellerDashBoard/>}/>
       <Route path='/admin/*' element={<AdminDashboard/>}/>
