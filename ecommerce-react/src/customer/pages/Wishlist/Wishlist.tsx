@@ -16,7 +16,7 @@ const Wishlist = () => {
     <section>
         <h1><strong>My wishlist</strong> 5items</h1>
         <div className='pt-10 flex flex-wrap gap-5'>
-            {wishlist.wishlist?.products.map((item)=><WishlistProductCard/>)}
+            {wishlist.wishlist?.products.map((item)=><WishlistProductCard item={item}/>)}
         </div>
     </section>
 </div>

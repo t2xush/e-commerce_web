@@ -38,11 +38,11 @@ export const getWishlistByUserId = createAsyncThunk(
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         });
-        console.log("add product to wishlist", response.data);
+        console.log("update wishlist", response.data);
         return response.data;
       } catch (error: any) {
         console.log("error", error.response);
-        return rejectWithValue("Failed to add product to wishlist");
+        return rejectWithValue("Failed to update wishlist");
       }
     }
   );
