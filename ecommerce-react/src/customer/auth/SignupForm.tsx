@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch } from '../../state/store';
 import { useFormik } from 'formik';
 import { sendLoginSignupOtp, signup } from '../../state/authSlice';
 import { Button, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const SignupForm = () => {
     const dispatch=useAppDispatch();
+    const [isSignup, setIsSignup] = useState(false);
+const navigate=useNavigate()
+const [signupError, setSignupError] = useState(false);
+
 
     const formik=useFormik({
         initialValues:{
@@ -13,9 +18,28 @@ const SignupForm = () => {
             otp:"",
             fullName:""
         },
-        onSubmit:(values)=>{
-            console.log("form data ",values)
-            dispatch(signup({email:values.email,otp:values.otp,fullName:values.fullName}))
+        onSubmit:async(values)=>{
+          try {
+            console.log('form data ', values);
+            const response = await dispatch(
+              signup({ email: values.email, otp: values.otp, fullName: values.fullName })
+            ).unwrap(); // Wait for the action to complete and unwrap the result
+            
+            if (response.success) { // Assuming the action returns a "success" flag
+              setIsSignup(true);
+              setSignupError(false);
+              setTimeout(() => navigate('/'), 2000);
+            } else {
+              setSignupError(true);
+            }
+          } catch (error) {
+            console.error('Signup failed:', error);
+            setSignupError(true);
+          }
+            // console.log("form data ",values)
+            // dispatch(signup({email:values.email,otp:values.otp,fullName:values.fullName}))
+            // setIsSignup(true);
+            // setTimeout(() => navigate("/seller"), 2000);
         }
 
     })
@@ -71,6 +95,12 @@ const SignupForm = () => {
            fullWidth variant='contained' sx={{py:"10px"}}>
             Sign up
           </Button>
+          {isSignup && (
+          <p className="text-green-500 mt-2 text-center">Seller login successful! Redirecting...</p>
+        )}
+        {signupError && (
+          <p className="text-red-500 mt-2 text-center">Something went wrong. Please try again.</p>
+        )}
       
 
 

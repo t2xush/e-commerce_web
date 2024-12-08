@@ -15,11 +15,11 @@ const LoginForm = () => {
             email:"",
             otp:""
         },
-        onSubmit:(values)=>{
+        onSubmit:async(values)=>{
             console.log("form data ",values)
-           dispatch(signin(values))
+          await dispatch(signin(values));
           if(auth.isLoggedIn){
-            navigate('/')
+            setTimeout(() => navigate('/'), 2000);
           }
         }
 
@@ -27,7 +27,7 @@ const LoginForm = () => {
 
     useEffect(()=>{
       if(auth.isLoggedIn){
-        navigate('/')
+        setTimeout(() => navigate('/'), 2000);
       }
     },[auth.isLoggedIn])
 
@@ -36,6 +36,8 @@ const LoginForm = () => {
     const handleSendOtp=()=>{
         dispatch(sendLoginSignupOtp({email:formik.values.email}))
       }
+
+
   return (
     <div>
         <h1 className='text-center font-bold text-xl text-primary-color pb-5'>
@@ -66,16 +68,18 @@ const LoginForm = () => {
           />
           </div>}
 
-          {auth.otpSent?  <Button onClick={()=>formik.handleSubmit()}
+          {/* {auth.otpSent?  <Button onClick={()=>formik.handleSubmit()}
            fullWidth variant='contained' sx={{py:"10px"}}>
             Login
           </Button> : <Button onClick={handleSendOtp} fullWidth variant='contained' sx={{py:"10px"}}>
            {auth.loading? <CircularProgress/> :  "Send Otp"}
+
           
           
-          </Button> }
-          {/* <Button onClick={handleSendOtp}fullWidth variant='contained' sx={{py:"10px"}}>
+          </Button> } */}
+          <Button onClick={handleSendOtp}fullWidth variant='contained' sx={{py:"10px"}}>
            {auth.loading? <CircularProgress/> :  "Send Otp"}
+
           
           
           </Button>
@@ -83,7 +87,14 @@ const LoginForm = () => {
           <Button onClick={()=>formik.handleSubmit()}
            fullWidth variant='contained' sx={{py:"10px"}}>
             Login
-          </Button> */}
+          </Button>
+          {/* {auth.otpSent && (
+          <p className="text-green-500 mt-2 text-center">otp sent successful! check your email</p>
+        )} */}
+
+          {auth.isLoggedIn && (
+          <p className="text-green-500 mt-2 text-center">login successful! </p>
+        )}
       
 
 

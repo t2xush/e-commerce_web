@@ -11,18 +11,35 @@ const SellerLoginForm = () => {
 const dispatch=useAppDispatch();
 const [sellerLoggedIn, setSellerLoggedIn] = useState(false);
 const navigate=useNavigate()
-
+const [signinError, setSigninError] = useState(false);
 
     const formik=useFormik({
         initialValues:{
             email:"",
             otp:""
         },
-        onSubmit:(values)=>{
-            console.log("form data ",values)
-            dispatch(sellersignin({email:values.email,otp:values.otp}))
-            setSellerLoggedIn(true);
-      setTimeout(() => navigate("/seller"), 2000);
+        onSubmit:async(values)=>{
+          try {
+            console.log('form data ', values);
+            const response = await    dispatch(sellersignin({email:values.email,otp:values.otp}))
+            .unwrap(); // Wait for the action to complete and unwrap the result
+            
+            if (response.success) { // Assuming the action returns a "success" flag
+              setSellerLoggedIn(true);
+              setSigninError(false);
+              setTimeout(() => navigate('/seller'), 2000);
+            } else {
+              setSigninError(true);
+            }
+          } catch (error) {
+            console.error('Signin failed:', error);
+            setSigninError(true);
+          }
+
+      //       console.log("form data ",values)
+      //       dispatch(sellersignin({email:values.email,otp:values.otp}))
+      //       setSellerLoggedIn(true);
+      // setTimeout(() => navigate("/seller"), 2000);
         }
 
     })
@@ -72,10 +89,11 @@ const navigate=useNavigate()
             Login
           </Button>
           {sellerLoggedIn && (
-            <p className="text-green-500 mt-2 text-center">
-              seller login successfully! Redirecting...
-            </p>
-          )}
+          <p className="text-green-500 mt-2 text-center">Seller login successful! Redirecting...</p>
+        )}
+        {signinError && (
+          <p className="text-red-500 mt-2 text-center">Something went wrong. Please try again.</p>
+        )}
       
 
 
