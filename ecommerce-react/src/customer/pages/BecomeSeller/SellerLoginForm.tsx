@@ -1,13 +1,17 @@
 import { Button, TextField } from '@mui/material'
 import { useFormik } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch } from '../../../state/store'
 import { sendLoginSignupOtp } from '../../../state/authSlice'
 import { sellersignin } from '../../../state/seller/sellerAuthSlice'
+import { useNavigate } from 'react-router-dom'
 
 
 const SellerLoginForm = () => {
 const dispatch=useAppDispatch();
+const [sellerLoggedIn, setSellerLoggedIn] = useState(false);
+const navigate=useNavigate()
+
 
     const formik=useFormik({
         initialValues:{
@@ -17,6 +21,8 @@ const dispatch=useAppDispatch();
         onSubmit:(values)=>{
             console.log("form data ",values)
             dispatch(sellersignin({email:values.email,otp:values.otp}))
+            setSellerLoggedIn(true);
+      setTimeout(() => navigate("/seller"), 2000);
         }
 
     })
@@ -65,6 +71,11 @@ const dispatch=useAppDispatch();
            fullWidth variant='contained' sx={{py:"10px"}}>
             Login
           </Button>
+          {sellerLoggedIn && (
+            <p className="text-green-500 mt-2 text-center">
+              seller login successfully! Redirecting...
+            </p>
+          )}
       
 
 
