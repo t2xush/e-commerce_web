@@ -32,7 +32,9 @@ const Navbar = () => {
              {!isLarge && <IconButton>
                 <MenuIcon />
                 </IconButton>}
-              <h1 className='logo cursor-pointer text-lg md:text-2xl text-primary-color'>
+              <h1 
+               onClick={()=>navigate('/')}
+              className='logo cursor-pointer text-lg md:text-2xl text-primary-color'>
                 G&X
               </h1>
               <ul className='flex items-center font-medium text-gray-800'>
