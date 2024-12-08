@@ -6,6 +6,8 @@ import Orders from './Orders'
 import OrderDetails from './OrderDetails'
 import UserDetails from './UserDetails'
 import Address from './Address'
+import { useAppDispatch } from '../../../state/store'
+import { logout } from '../../../state/authSlice'
 
 
 const menu = [
@@ -18,8 +20,17 @@ const menu = [
 ]
 const Account = () => {
     const navigate = useNavigate();
-    const handleClick = (item: any) => navigate(item.path);
+
+    const handleClick = (item: any) => 
+        {navigate(item.path)
+            if(item.path=='/') handleLogout()
+        };
     const location = useLocation();
+    const dispatch=useAppDispatch();
+
+    const handleLogout=()=>[
+        dispatch(logout(navigate))
+    ]
 
     return (
         <div>
@@ -32,7 +43,9 @@ const Account = () => {
                     <section className='col-span-1 lg:border-r lg:pr-5 py-5 h-full'>
                         {
                             menu.map((item) => (
-                                <div onClick={() => handleClick(item)} key={item.name}
+                                <div onClick={() => handleClick(item)
+                                    
+                                } key={item.name}
                                     className={`${item.path === location.pathname ? 'bg-primary-color text-white' : ''}
                                         py-3 cursor-pointer hover:text-white hover:bg-primary-color
                              px-5 rounded-md border-b`}>

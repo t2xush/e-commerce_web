@@ -58,7 +58,7 @@ const Navbar = () => {
               <SearchIcon />
             </IconButton>
             
-
+<div onClick={()=>navigate('/account')}>
             {
              auth.isLoggedIn ? <Button
               // onClick={()=>navigate("/seller")}
@@ -72,6 +72,7 @@ const Navbar = () => {
              
               </Button> : <Button onClick={()=>navigate("/login")} variant='contained'>Login</Button>
             }
+</div>
             <IconButton onClick={()=>navigate("/wishlist")}>
               <FavoriteBorder sx={{fontSize:29}}/>
             </IconButton>
