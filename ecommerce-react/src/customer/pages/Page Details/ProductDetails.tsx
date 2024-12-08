@@ -143,8 +143,21 @@ const ProductDetails = () => {
               <Button onClick={() => setQuantity(quantity + 1)}>
                 <Add />
               </Button>
+              {/* <h1>Size</h1>
+              <span>{product.product?.sizes}</span> */}
+
             </div>
           </div>
+          <div className="flex justify-between items-center py-2 border w-[180px] px-3 mt-5">
+            <div className="flex gap-1 items-center">
+              <span>size</span>
+             
+            </div>
+            <Divider orientation="vertical" flexItem />
+            <span >{product.product?.sizes}</span>
+          </div>
+
+          
           <div className="mt-12 flex items-center gap-5">
             <Button
               fullWidth
@@ -174,7 +187,10 @@ const ProductDetails = () => {
               wishlist
             </Button>
           </div>
+
+
           <div className="mt-5">
+          <h1>Description</h1>
             <p>{product.product?.description}</p>
           </div>
           <div className="mt-7">
