@@ -16,7 +16,7 @@ const WishlistProductCard = ({ item }: { item: Product }) => {
 
   return (
     <div className="w-60 relative">
-      <div className="w-full">
+      <div className="w-full h-80 overflow-hidden">
         <img src={item.images[0]} className="object-top w-full" alt="" />
       </div>
       <div className="pt-3 space-y-1">
