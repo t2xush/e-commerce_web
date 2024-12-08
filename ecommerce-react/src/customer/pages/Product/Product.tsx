@@ -44,12 +44,14 @@ const Product = () => {
     const miniDiscount = searchParam.get("discount")
       ? Number(searchParam.get("discount"))
       : undefined;
+      const pageNumber=page-1;
 
     const filters = {
       color: color || "",
       minPrice: minPrice ? Number(minPrice) : undefined,
       maxPrice: maxPrice ? Number(maxPrice) : undefined,
       miniDiscount,
+      pageNumber
     };
 
     console.log(filters);

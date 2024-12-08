@@ -26,6 +26,7 @@ import { mainCategory } from "../../../customer/data/category/mainCategory";
 import { color } from "../../../customer/data/Filter/color";
 import { useAppDispatch } from "../../../state/store";
 import { createProduct } from "../../../state/seller/sellerProductSlice";
+import { useNavigate } from "react-router-dom";
 
 const categoryTwo: { [key: string]: any[] } = {
   men: menLevelTwo,
@@ -46,7 +47,9 @@ const categoryThree: { [key: string]: any[] } = {
 
 const AddProducts = () => {
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [productCreated, setProductCreated] = useState(false);
   const dispatch=useAppDispatch();
+  const navigate=useNavigate()
 
 
 
@@ -67,6 +70,8 @@ const AddProducts = () => {
     onSubmit: (values) => {
       console.log(values);
       dispatch(createProduct({request:values,jwt:localStorage.getItem("jwt")}))
+      setProductCreated(true);
+      setTimeout(() => navigate("/seller/products"), 2000);
     },
   });
 
@@ -373,6 +378,11 @@ const AddProducts = () => {
                 "Add Product"
               )}
             </Button>
+            {productCreated && (
+            <p className="text-green-500 mt-2 text-center">
+              Product created successfully! Redirecting...
+            </p>
+          )}
           </Grid2>
         </Grid2>
       </form>
