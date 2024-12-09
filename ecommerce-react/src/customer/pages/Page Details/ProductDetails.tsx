@@ -19,6 +19,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchProductById } from "../../../state/customer/ProductSlice";
 import { addItemToCart } from "../../../state/customer/cartSlice";
 import { addProductToWishlist } from "../../../state/customer/wishlistSlice";
+import SimilarProduct from "./SimilarProduct";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = React.useState(1);
@@ -177,10 +178,21 @@ const ProductDetails = () => {
           <div className="mt-5">
             <p>{product.product?.description}</p>
           </div>
-          <div className="mt-7">
+          <div className="mt-12 space-y-5">
             <ReviewCard />
+          <Divider />
           </div>
         </section>
+      </div>
+
+      <div className="mt-20">
+        <h1 className="text-lg font-bold">
+          Similar Products
+        </h1>
+        <div className="pt-5">
+        <SimilarProduct />
+        </div>
+       
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ import Auth from './customer/auth/Auth';
 import { fetchUserProfile } from './state/authSlice';
 import Wishlist from './customer/pages/Wishlist/Wishlist';
 import Account from './admin/pages/Account/Account';
+import Review from './customer/pages/Review/Review';
 
 function App() {
 const dispatch=useAppDispatch();
@@ -71,6 +72,7 @@ const navigate=useNavigate()
       <Route path='/product-details/:categoryId/:name/:productId' element={ <ProductDetails />}/>
       <Route path='/products/:category' element={ <Product />}/>
       <Route path='/account/*' element={<Account/>}/>
+      <Route path='/review' element={<Review/>}/>
   
       
 
