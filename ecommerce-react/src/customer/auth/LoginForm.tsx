@@ -18,18 +18,31 @@ const LoginForm = () => {
         onSubmit:async(values)=>{
             console.log("form data ",values)
           await dispatch(signin(values));
-          if(auth.isLoggedIn){
+          if(auth.isLoggedIn&&auth.user?.role=='ROLE_CUSTOMER'){
             setTimeout(() => navigate('/'), 2000);
+          }
+          if(auth.isLoggedIn&&auth.user?.role=='ROLE_ADMIN'){
+            setTimeout(() => navigate('/admin'), 2000);
+          }
+          if(auth.isLoggedIn&&auth.user?.role=='ROLE_SELLER'){
+            setTimeout(() => navigate('/seller'), 2000);
           }
         }
 
     })
 
     useEffect(()=>{
-      if(auth.isLoggedIn){
+      if(auth.isLoggedIn&&auth.user?.role=='ROLE_CUSTOMER'){
         setTimeout(() => navigate('/'), 2000);
       }
-    },[auth.isLoggedIn])
+      if(auth.isLoggedIn&&auth.user?.role=='ROLE_ADMIN'){
+        setTimeout(() => navigate('/admin'), 2000);
+      }
+      if(auth.isLoggedIn&&auth.user?.role=='ROLE_SELLER'){
+        setTimeout(() => navigate('/seller'), 2000);
+      }
+
+    },[auth.isLoggedIn,auth.user?.role])
 
    
 
