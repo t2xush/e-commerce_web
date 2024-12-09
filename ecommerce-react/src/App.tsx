@@ -25,6 +25,7 @@ import Auth from './customer/auth/Auth';
 import { fetchUserProfile } from './state/authSlice';
 import Wishlist from './customer/pages/Wishlist/Wishlist';
 import Account from './admin/pages/Account/Account';
+import PaymentSuccess from './customer/pages/PaymentSuccess';
 
 function App() {
 const dispatch=useAppDispatch();
@@ -68,6 +69,7 @@ const navigate=useNavigate()
      
       <Route path='Cart' element={ <Cart />}/>
        <Route path='Checkout' element={<Checkout />}/>
+       <Route path='payment-success/:orderId' element={<PaymentSuccess />}/>
       <Route path='/product-details/:categoryId/:name/:productId' element={ <ProductDetails />}/>
       <Route path='/products/:category' element={ <Product />}/>
       <Route path='/account/*' element={<Account/>}/>
