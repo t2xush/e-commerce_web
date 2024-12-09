@@ -115,6 +115,6 @@ public class PaymentServiceImpl implements PaymentService {
 
         Session session=Session.create(params);
 
-        return session.getCancelUrl();
+        return session.getUrl();
     }
 }
