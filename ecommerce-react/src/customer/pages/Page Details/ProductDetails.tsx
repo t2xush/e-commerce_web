@@ -57,6 +57,19 @@ const ProductDetails = () => {
     }
     // productId&& dispatch(addProductToWishlist({ productId: product.product?.id}));
   };
+    const handleAddToCart=()=>{
+      if(product.product?.id&&product.product?.sizes){
+        const addItemRequest={
+          productId:product.product.id,
+          size:product.product.sizes[0],
+          quantity,
+        };
+        const jwt=localStorage.getItem("jwt")
+        dispatch(addItemToCart({jwt,request:addItemRequest}))
+      }
+    }
+
+
 
   return (
     <div className="px-5 lg:px-20 pt-10">
@@ -164,6 +177,7 @@ const ProductDetails = () => {
               variant="contained"
               startIcon={<AddShoppingCart />}
               sx={{ py: "1rem" }}
+              onClick={handleAddToCart}
             >
               Add to Cart
             </Button>
