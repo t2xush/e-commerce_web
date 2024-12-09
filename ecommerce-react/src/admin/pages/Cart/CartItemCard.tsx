@@ -4,7 +4,8 @@ import React from 'react'
 import { CartItem } from '../../../types/CartTypes'
 import BusinessDetails from '../../../seller/pages/Account/BusinessDetails'
 import { useAppDispatch } from '../../../state/store'
-import { updateCartItem } from '../../../state/customer/cartSlice'
+import { updateCartItem,deleteCartItem } from '../../../state/customer/cartSlice'
+
 
 const CartItemCard = ({item}:{item:CartItem}) => {
   const dispatch=useAppDispatch()
@@ -15,9 +16,16 @@ const CartItemCard = ({item}:{item:CartItem}) => {
       cartItem:{quantity:item.quantity+value}
     }))
 
-    
-
   }
+  const handleRemoveItem = () => {
+    dispatch(deleteCartItem({
+      jwt: localStorage.getItem('jwt') || '',  // Pass the JWT token to the backend
+      cartItemId: item.id,  // Pass the cartItemId to identify which item to remove
+    }));
+  };
+  
+
+
   return (
     <div className='border rounded-md relative'>
 
@@ -65,8 +73,8 @@ const CartItemCard = ({item}:{item:CartItem}) => {
         </div>
       </div>
      
-      <div className='absolute top-1 right-1'>
-        <IconButton color='primary'>
+      <div className='absolute top-1 right-1' >
+        <IconButton color='primary' onClick={handleRemoveItem}>
           <Close />
         </IconButton>
 
