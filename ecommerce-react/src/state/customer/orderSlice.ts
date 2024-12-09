@@ -64,6 +64,7 @@ export const createOrder = createAsyncThunk<
         params: { paymentMethod: paymentGateway },
       });
       console.log("order created", response.data);
+      console.log("payment gateway", paymentGateway);
       if (response.data.payment_link_url) {
         window.location.href = response.data.payment_link_url;
       }

@@ -36,6 +36,9 @@ public class OrderController {
         Cart cart=cartService.findeUserCart(user);
         Set<Order> orders=orderService.createOrder(user,shippingAddress,cart);
 
+
+        orders.forEach(order -> System.out.println("Order sellerId: " + order.getSellerId()));
+
         PaymentOrder paymentOrder=paymentService.createOrder(user,orders);
        PaymentLinkResponse res=new PaymentLinkResponse();
 

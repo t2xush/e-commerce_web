@@ -33,15 +33,15 @@ const navigate=useNavigate()
 
 
 
-   useEffect(()=>{
-  dispatch(fetchSellerProfile(localStorage.getItem("jwt")||""))
-   },[])
+  //  useEffect(()=>{
+  // dispatch(fetchSellerProfile(localStorage.getItem("jwt")||""))
+  //  },[])
 
-   useEffect(()=>{
-   if(seller.profile){
-    navigate("/seller")
-   }
-     },[seller.profile])
+  //  useEffect(()=>{
+  //  if(seller.profile){
+  //   navigate("/seller")
+  //  }
+  //    },[seller.profile])
 
     useEffect(()=>{
       // dispatch(fetchUserProfile(localStorage.getItem("jwt")||""))

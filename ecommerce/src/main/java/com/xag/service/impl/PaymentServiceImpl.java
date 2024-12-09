@@ -15,6 +15,7 @@ import com.xag.repository.PaymentOrderRepository;
 import com.xag.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -22,10 +23,14 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
-    private PaymentOrderRepository paymentOrderRepository;
-    private OrderRepository orderRepository;
+    private final PaymentOrderRepository paymentOrderRepository;
+    private final OrderRepository orderRepository;
 
-    private String stripeSecretKey="stripesecretkey";
+//    private String stripeSecretKey="stripesecretkey";
+
+    @Value("${stripe.api.key}")
+    private String stripeSecretKey;
+
     @Override
     public PaymentOrder createOrder(User user, Set<Order> orders) {
         Long amount=orders.stream().mapToLong(Order::getTotalSellingPrice).sum();
@@ -97,7 +102,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .addLineItem(SessionCreateParams.LineItem.builder()
                         .setQuantity(1L)
                         .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
-                                .setCurrency("euro")
+                                .setCurrency("EUR")
                                 .setUnitAmount(amount*100)
                                 .setProductData(
                                         SessionCreateParams

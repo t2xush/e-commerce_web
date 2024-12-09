@@ -7,13 +7,13 @@ import lombok.Data;
 public class PaymentDetails {
 
     private String paymentId;
-    private String razorpayPaymentLinkId;
+    private String stripePaymentLinkId;
 
-    private String razorpayPaymentLinkReferenceId;
+    private String stripePaymentLinkReferenceId;
 
-    private String razorpayPaymentLinkStatus;
+    private String stripePaymentLinkStatus;
 
-    private String razorpayPaymentIdZWSP;
+    private String stripePaymentIdZWSP;
 
     private PaymentStatus status;
 }

@@ -27,7 +27,7 @@ const [signupError, setSignupError] = useState(false);
             
             if (response.success) { // Assuming the action returns a "success" flag
               setIsSignup(true);
-              setSignupError(false);
+              // setSignupError(false);
               setTimeout(() => navigate('/'), 2000);
             } else {
               setSignupError(true);
