@@ -27,7 +27,7 @@ export const fetchProductById=createAsyncThunk("products/fetchProductById",
 
 
 export const searchProduct=createAsyncThunk("products/searchProduct",
-    async(query,{rejectWithValue})=>{
+    async(query:string,{rejectWithValue})=>{
         try{
             const response=await api.get(`${API_URL}/search`,{
                 params:{
