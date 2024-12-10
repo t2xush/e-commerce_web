@@ -3,12 +3,12 @@ import React from 'react'
 import DrawerList from '../../../components/DrawerList';
 
 const menu=[
-    {
-        name:"Dashboard",
-        path:"/seller",
-        icon:<Dashboard className='text-primary-color'/>,
-        activeIcon:<Dashboard className='text-white'/>
-    },
+    // {
+    //     name:"Dashboard",
+    //     path:"/seller",
+    //     icon:<Dashboard className='text-primary-color'/>,
+    //     activeIcon:<Dashboard className='text-white'/>
+    // },
     {
         name:"Orders",
         path:"/seller/orders",

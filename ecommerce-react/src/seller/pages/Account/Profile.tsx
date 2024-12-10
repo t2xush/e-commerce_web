@@ -1,12 +1,13 @@
 import { Edit } from "@mui/icons-material";
 import { Avatar, Box, Button, Divider, Modal, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileFieldCard from "../../../components/ProfileFieldCard";
 import PersonalDetails from "./PersonalDetails";
 import BusinessDetails from "./BusinessDetails";
 import PickupAddress from "./PickupAddress";
 import BankDetails from "./BankDetails";
-import { useAppSelector } from "../../../state/store";
+import { useAppDispatch, useAppSelector } from "../../../state/store";
+import { fetchSellerProfile } from "../../../state/seller/sellerSlice";
 
 const style = {
   position: "absolute",
@@ -29,6 +30,7 @@ const Profile = () => {
   const handleClose = () => setOpen(false);
 
   const [selectedForm, setSelectedForm] = useState("personalDetails");
+  const dispatch=useAppDispatch();
 
   const renderSelectedForm = () => {
     switch (selectedForm) {
@@ -42,6 +44,10 @@ const Profile = () => {
         return <BankDetails />;
     }
   };
+
+     useEffect(()=>{
+  dispatch(fetchSellerProfile(localStorage.getItem("jwt")||""))
+   },[])
 
   return (
     <div className="lg:px-20 pt-3 pb-20 space-y-20">
