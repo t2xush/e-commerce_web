@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useAppDispatch, useAppSelector } from "../../../state/store";
-import { fetchSellerOrders } from "../../../state/seller/sellerOrderSlice";
+import { fetchSellerOrders, updateOrdersStatus } from "../../../state/seller/sellerOrderSlice";
 import { Button, Menu, MenuItem } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -57,6 +57,12 @@ export default function Ordertable() {
   const handleClose = (orderId:number) =>()=> {
     setAnchorEl((prev:any)=>({...prev,[orderId]:null}));
   };
+
+  const handleUpdateOrderStatus=(orderId:number,orderStatus:any)=>()=>{
+    dispatch(updateOrdersStatus({jwt:localStorage.getItem("jwt") ||"" ,
+    orderId,orderStatus}))
+
+  }
 
   React.useEffect(() => {
     dispatch(fetchSellerOrders(localStorage.getItem("jwt") || ""));
@@ -136,7 +142,10 @@ export default function Ordertable() {
                   }}
                 >
 
-                  {orderStatus.map((status)=>  <MenuItem key={status.label} onClick={handleClose(item.id)}>{status.label}</MenuItem>)}
+                  {orderStatus.map((status)=>  <MenuItem key={status.label} 
+                  onClick={handleUpdateOrderStatus(item.id,status.label)}>
+                    {status.label}
+                    </MenuItem>)}
                 
           
                 </Menu>

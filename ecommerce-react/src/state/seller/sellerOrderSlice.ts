@@ -31,7 +31,7 @@ export const fetchSellerOrders = createAsyncThunk<Order[], string>(
     "sellerOrders/updateOrdersStatus",
     async( {jwt,orderId,orderStatus}, { rejectWithValue }) => {
       try {
-        const response = await api.patch(`/api/sellers/orders/${orderId}/status/${OrderStatus}`,null, {
+        const response = await api.patch(`/api/seller/orders/${orderId}/status/${orderStatus}`,null, {
           headers: { Authorization: `Bearer ${jwt}` },
         });
         console.log("order status updated", response.data);
