@@ -42,6 +42,22 @@ export const createProduct=createAsyncThunk<Product,{request:any,jwt:string |nul
     }
 )
 
+export const deleteProduct = createAsyncThunk<void, { id: number, jwt: string }>(
+    '/sellerProduct/deleteProduct',
+    async ({ id, jwt }, { rejectWithValue }) => {
+      try {
+        // Making a DELETE request to the backend
+        await api.delete(`/sellers/products/${id}`, {
+          headers: {
+            Authorization: `Bearer ${jwt}`, // Sending JWT for authentication
+          },
+        });
+      } catch (error) {
+        return rejectWithValue(error);
+      }
+    }
+  );
+
 interface SellerProductState{
     products:Product[];
     loading:boolean;
@@ -83,6 +99,22 @@ const sellerProductSlice=createSlice({
         state.loading=false;
         state.error=action.error.message;
       })
+
+
+
+
+      .addCase(deleteProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.loading = false;
+       
+        state.products = state.products.filter((product) => product.id !== action.meta.arg.id);
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
     }
 })
 

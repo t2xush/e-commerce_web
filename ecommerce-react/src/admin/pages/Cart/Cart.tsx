@@ -34,6 +34,7 @@ const Cart = () => {
 
   return (
     <div className="pt-10 px-5 sm:px-10 md:px-60 min-h-screen">
+         <h1><strong>My Cart</strong> {cart.cart?.cartItems.length} items</h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="cartItemSection lg:col-span-2 space-y-3">
           {cart.cart?.cartItems.map((item) => <CartItemCard item={item} />)}

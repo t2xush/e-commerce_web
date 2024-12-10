@@ -8,11 +8,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useAppDispatch, useAppSelector } from '../../../state/store';
-import { useEffect } from 'react';
-import { fetchSellerProducts } from '../../../state/seller/sellerProductSlice';
+import { useEffect, useState } from 'react';
+import { deleteProduct, fetchSellerProducts } from '../../../state/seller/sellerProductSlice';
 import { Product } from '../../../types/ProductTypes';
-import { Button } from '@mui/material';
-import { Edit } from '@mui/icons-material';
+import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
+import { Delete, Edit } from '@mui/icons-material';
+import { number } from 'yup';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,36 +35,51 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 export default function ProductTable() {
   const dispatch=useAppDispatch();
   const {sellerProduct}=useAppSelector(store=>store);
+  const [open, setOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<number | null>(null);
+  
 
-  useEffect(()=>{
-    dispatch(fetchSellerProducts(localStorage.getItem("jwt")))
-  },[])
+  // useEffect(()=>{
+  //   dispatch(fetchSellerProducts(localStorage.getItem("jwt")))
+  // },[])
 
+
+    useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      dispatch(fetchSellerProducts(jwt));
+    }
+  }, [dispatch]);
+
+  const handleClickOpen = (id: number) => {
+    setProductToDelete(id); // Set the product id to delete
+    setOpen(true); // Open the dialog
+  };
+
+  // Handle closing the dialog
+  const handleClose = () => {
+    setOpen(false);
+    setProductToDelete(null); // Reset the product id
+  };
+
+  // Handle the delete action
+  const handleDelete = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt && productToDelete) {
+      dispatch(deleteProduct({ id: productToDelete, jwt }));
+      handleClose(); // Close the dialog after deletion
+    }
+  };
 
 
 
   return (
+    <div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -75,6 +91,7 @@ export default function ProductTable() {
             <StyledTableCell align="right">Color</StyledTableCell>
             <StyledTableCell align="right">Update Stock</StyledTableCell>
             <StyledTableCell align="right">Update</StyledTableCell>
+            <StyledTableCell align="right">Delete</StyledTableCell>
             
           </TableRow>
         </TableHead>
@@ -96,16 +113,43 @@ export default function ProductTable() {
                 <Button size='small'>
                   in_stock</Button>
                   }</StyledTableCell>
-                    <StyledTableCell align="right">{
+              <StyledTableCell align="right">{
                 <Button size='small'>
                   <Edit/>
                   </Button>
                   }</StyledTableCell>
+{/*                   
+                    <StyledTableCell align="right">
+                    {typeof item.id === 'number' && (
+                  <Button size="small" onClick={() => handleDelete(Number(item.id))}>
+                    <Delete />
+                  </Button>
+                )}
+                 
+                  </StyledTableCell> */}
+                    <StyledTableCell align="right">
+                  <Button size="small" onClick={() => handleClickOpen(Number(item.id))}>
+                    <Delete />
+                  </Button>
+                </StyledTableCell>
             </StyledTableRow>
             
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+    <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Are you sure you want to delete this product?</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleDelete} color="primary">
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+   
   );
 }
