@@ -27,6 +27,7 @@ const Cart = () => {
   const discount = cart.cart?.discount || 0;
   const shipping = 0;
   const total = subtotal;
+
   useEffect(() => {
     dispatch(fetchUserCart(localStorage.getItem("jwt") || ""));
   }, []);
@@ -37,7 +38,9 @@ const Cart = () => {
         <div className="cartItemSection lg:col-span-2 space-y-3">
           {cart.cart?.cartItems.map((item) => <CartItemCard item={item} />)}
         </div>
-        <div className="col-span-1 text-sm space-y-3">
+
+
+        {cart.cart?.cartItems && cart.cart.cartItems.length > 0&&<div className="col-span-1 text-sm space-y-3">
           <div className="border rounded-md px-5 py-3 space-y-5">
             <div className="flex gap-3 text-sm items-center">
               <div className="flex gap-3 text-sm items-center">
@@ -69,7 +72,9 @@ const Cart = () => {
           </div>
           <div className="border rounded-md">
 
-       <PricingCard subtotal={subtotal} discount={discount} shipping={shipping} total={total}/>
+       
+       
+      <PricingCard subtotal={subtotal} discount={discount} shipping={shipping} total={total}/>
             <div className="p-5">
               <Button
                 onClick={() => navigate("/Checkout")}
@@ -81,7 +86,7 @@ const Cart = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );
