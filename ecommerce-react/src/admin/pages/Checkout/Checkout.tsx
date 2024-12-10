@@ -6,11 +6,13 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import AddressCard from "./AddressCard";
 import AddressForm from "./AddressForm";
 import PricingCard from "../Cart/PricingCard";
 import { constants } from "buffer";
+import { fetchUserCart } from "../../../state/customer/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../../state/store";
 const style = {
   position: "absolute",
   top: "50%",
@@ -45,6 +47,18 @@ const Checkout = () => {
   const handlePaymentChange = (event: any) => {
     setPaymentGateway(event.target.value);
   };
+
+  const dispatch = useAppDispatch();
+  const { cart } = useAppSelector((store) => store);
+
+  const subtotal = cart.cart?.totalSellingPrice || 0;
+  const discount = cart.cart?.discount || 0;
+  const shipping = 0;
+  const total = subtotal;
+  useEffect(() => {
+    dispatch(fetchUserCart(localStorage.getItem("jwt") || ""));
+  }, []);
+
 
   return (
     <>
@@ -100,7 +114,7 @@ const Checkout = () => {
               </div>
             </div>
             <div className="border rounded-md">
-              <PricingCard />
+            <PricingCard subtotal={subtotal} discount={discount} shipping={shipping} total={total}/>
               <div className="p-5">
                 <Button fullWidth variant="contained" sx={{ py: "11px" }}>
                   Checkout
