@@ -7,6 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useAppDispatch } from '../../../state/store';
+import { fetchSellerOrders } from '../../../state/seller/sellerOrderSlice';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,6 +49,10 @@ const rows = [
 ];
 
 export default function Ordertable() {
+  const dispatch=useAppDispatch()
+  React.useEffect(()=>{
+    dispatch(fetchSellerOrders(localStorage.getItem("jwt") ||""))
+  },[])
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

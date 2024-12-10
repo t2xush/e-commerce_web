@@ -24,7 +24,7 @@ const [signinError, setSigninError] = useState(false);
             const response = await    dispatch(sellersignin({email:values.email,otp:values.otp}))
             .unwrap(); // Wait for the action to complete and unwrap the result
             
-            if (response.success) { // Assuming the action returns a "success" flag
+            if (response.jwt) { 
               setSellerLoggedIn(true);
               setSigninError(false);
               setTimeout(() => navigate('/seller'), 2000);
