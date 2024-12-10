@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import OrderItem from './OrderItem'
+import { useAppDispatch, useAppSelector } from '../../../state/store'
+import { fetchUserOrderHistory } from '../../../state/customer/orderSlice'
 
 const Orders = () => {
+  const dispatch=useAppDispatch()
+  const {order}=useAppSelector(store=>store)
+
+
+  useEffect(()=>{
+    dispatch(fetchUserOrderHistory(localStorage.getItem('jwt')||""))
+  },[])
   return (
     <div className='text-sm min-h-screen'>
       <div className='pb-5'>
