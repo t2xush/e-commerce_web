@@ -2,11 +2,17 @@ import { ElectricBolt } from '@mui/icons-material'
 import { Avatar } from '@mui/material'
 import { teal } from '@mui/material/colors'
 import React from 'react'
-import { OrderItem } from '../../../types/orderTypes'
+import { Order, OrderItem } from '../../../types/orderTypes'
+import { useNavigate } from 'react-router-dom'
 
-const OrderItemCard = ({item}:{item:OrderItem}) => {
+const OrderItemCard = ({item,order}:{item:OrderItem,order:Order}) => {
+  const navigate=useNavigate()
+
+
   return (
-    <div className='text-sm bg-white p-5 space-y-4 border rounded-md cursor-pointer'>
+    <div 
+    onClick={()=>navigate(`/account/order/${order.id}/${item.id}`)}
+    className='text-sm bg-white p-5 space-y-4 border rounded-md cursor-pointer'>
       <div className="flex items-center gap-5">
         <div>
           <Avatar sizes='small' sx={{ bgcolor: teal[500] }}>
@@ -15,7 +21,7 @@ const OrderItemCard = ({item}:{item:OrderItem}) => {
         </div>
         <div>
           <h1 className="font-bold text-primary-color">PENDING</h1>
-          <p>Arriving By Mon, 15 Jul</p>
+          <p>Arriving By {order.deliverDate}</p>
         </div>
 
       </div>

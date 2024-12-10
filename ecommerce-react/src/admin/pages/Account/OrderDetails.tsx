@@ -1,13 +1,25 @@
 import { Box, Button, Divider } from '@mui/material'
 import PaymentsIcon from '@mui/icons-material/Payments';
-import React from 'react'
+import React, { useEffect } from 'react'
 import Orders from './Orders'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import OrderStepper from './OrderStepper';
+import { useAppDispatch } from '../../../state/store';
+import { fetchOrderById, fetchOrderItemById } from '../../../state/customer/orderSlice';
 
 
 const OrderDetails = () => {
     const navigate=useNavigate()
+    const dispatch=useAppDispatch()
+   const {orderId,orderItemId}=useParams()
+
+    useEffect(()=>{
+        dispatch(fetchOrderById({orderId:Number(orderId),
+            jwt:localStorage.getItem('jwt')||""}))
+            dispatch(fetchOrderItemById({orderItemId:Number(orderItemId),
+                jwt:localStorage.getItem('jwt')||""}))
+      },[])
+
     return (
         <Box className="space-y-5">
             <section className='flex flex-col gap-5 justify-center items-center'>

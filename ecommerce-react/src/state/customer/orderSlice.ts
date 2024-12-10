@@ -40,11 +40,11 @@ export const fetchOrderById = createAsyncThunk<
     const response = await api.get(`${API_URL}/${orderId}`, {
       headers: { Authorization: `Bearer ${jwt}` },
     });
-    console.log("order fetched", response.data);
+    console.log("fetch order by id", response.data);
     return response.data;
   } catch (error: any) {
     console.log("error", error.response);
-    return rejectWithValue("failed to fetch order");
+    return rejectWithValue("failed to fetch order by id");
   }
 });
 

@@ -58,9 +58,9 @@ const Account = () => {
                     <section className='right lg:col-span-2 lg:pl-5 py-5'>
                         <Routes>
                         <Route path="/" element={<UserDetails />} />
-                        <Route path="orders" element={<Orders />} />
-                        <Route path="orders/:orderId/orderItemId" element={<OrderDetails />} />
-                        <Route path="addresses" element={<Address />} />
+                        <Route path="/orders" element={<Orders />} />
+                        <Route path="/order/:orderId/:orderItemId" element={<OrderDetails />} />
+                        <Route path="/addresses" element={<Address />} />
                         </Routes>
 
 

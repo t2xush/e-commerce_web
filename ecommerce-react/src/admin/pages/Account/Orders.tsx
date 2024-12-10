@@ -19,7 +19,7 @@ const Orders = () => {
       </div>
       <div className='space-y-2'>
 
-        {order.orders.map((order) => order.orderItems.map((item)=> <OrderItemCard item={item}/>))}
+        {order.orders.map((order) => order.orderItems.map((item)=> <OrderItemCard order={order} item={item}/>))}
 
       </div>
 
