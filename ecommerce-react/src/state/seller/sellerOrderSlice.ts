@@ -150,3 +150,6 @@ export const fetchSellerOrders = createAsyncThunk<Order[], string>(
             state.error = action.payload as string;
           })
     }})
+
+
+    export default sellerOrderSlice.reducer;
