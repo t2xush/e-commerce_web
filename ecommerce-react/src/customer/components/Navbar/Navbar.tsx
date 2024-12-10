@@ -37,6 +37,7 @@ const Navbar = () => {
   const handleSearch = () => {
     if (query.trim() !== "") {
       dispatch(searchProduct(query)); 
+      navigate(`/products/search=${query}`)
     }
   };
 

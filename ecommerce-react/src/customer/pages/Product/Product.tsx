@@ -16,7 +16,7 @@ import { Box } from "@mui/system";
 import { FilterAlt } from "@mui/icons-material";
 import { useActionData, useParams, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../state/store";
-import { fetchAllProducts } from "../../../state/customer/ProductSlice";
+import { fetchAllProducts, searchProduct } from "../../../state/customer/ProductSlice";
 
 const Product = () => {
   const theme = useTheme();
@@ -38,6 +38,9 @@ const Product = () => {
   };
 
   useEffect(() => {
+    const query = searchParam.get("search");
+
+
     const [minPrice, maxPrice] = searchParam.get("price")?.split("-") || [];
     const color = searchParam.get("color");
 
@@ -54,9 +57,15 @@ const Product = () => {
       pageNumber
     };
 
-    console.log(filters);
 
-    dispatch(fetchAllProducts({ category, filters }));
+    console.log(filters);
+    if (query) {
+      dispatch(searchProduct(query));  
+    }else{
+   dispatch(fetchAllProducts({ category, filters }));    
+    }
+
+   
   }, [category, searchParam]);
 
   return (
@@ -104,9 +113,27 @@ const Product = () => {
           </div>
           <Divider />
           <section className="products_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
-            {product.products.map((item) => (
+            {/* {product.products.map((item) => (
               <ProductCard item={item} />
+            ))} */}
+           
+              {/* {searchProduct.length > 0  ?
+              
+              (product.searchProduct.map((product) => (
+              <ProductCard key={product.id} item={product} />
+            ))):
+            (product.products.map((item) => (
+              <ProductCard key={item.id}item={item} />
+            )) )
+            
+            } */}
+             {(product.searchProduct.length > 0 ? product.searchProduct : product.products).map((item) => (
+              <ProductCard key={item.id} item={item} />
             ))}
+
+
+
+
           </section>
           <div className="flex py-10 justify-center">
             <Pagination

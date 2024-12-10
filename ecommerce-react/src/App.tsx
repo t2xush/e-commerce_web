@@ -73,8 +73,10 @@ const navigate=useNavigate()
        <Route path='payment-success/:orderId' element={<PaymentSuccess />}/>
       <Route path='/product-details/:categoryId/:name/:productId' element={ <ProductDetails />}/>
       <Route path='/products/:category' element={ <Product />}/>
+      <Route path='/products/*' element={ <Product />}/>
       <Route path='/account/*' element={<Account/>}/>
       <Route path="/order/test" element={<OrderDetails />} />
+
 
   
       
