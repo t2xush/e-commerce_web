@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import OrderItem from './OrderItem'
+import OrderItemCard from './OrderItemCard'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
 import { fetchUserOrderHistory } from '../../../state/customer/orderSlice'
 
@@ -19,7 +19,7 @@ const Orders = () => {
       </div>
       <div className='space-y-2'>
 
-        {[1,1,1,1,1,1].map((item) => <OrderItem/>)}
+        {order.orders.map((order) => order.orderItems.map((item)=> <OrderItemCard item={item}/>))}
 
       </div>
 
