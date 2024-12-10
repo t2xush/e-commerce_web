@@ -29,7 +29,7 @@ const ProductDetails = () => {
   const { cart } = useAppSelector((store) => store);
   const navigate = useNavigate();
 
-  const { wishlist } = useAppSelector((store) => store);
+  const { wishlist ,auth} = useAppSelector((store) => store);
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [buttonText, setButtonText] = useState("Add to Cart");
@@ -53,12 +53,14 @@ const ProductDetails = () => {
 
   const handleWishlist = (event: any) => {
     event.stopPropagation();
+    if(auth.isLoggedIn){
     if (product.product?.id !== undefined) {
       dispatch(addProductToWishlist({ productId: product.product.id }));
-    }
+    }}
     // productId&& dispatch(addProductToWishlist({ productId: product.product?.id}));
   };
   const handleAddToCart = () => {
+    if(auth.isLoggedIn){
     if (product.product?.id && product.product?.sizes) {
       const addItemRequest = {
         productId: product.product.id,
@@ -70,6 +72,8 @@ const ProductDetails = () => {
       setSnackbarOpen(true);
       setButtonText("Added ");
       setTimeout(() => setButtonText("Add to Cart"), 2000);
+    }}else{
+      setButtonText("please login first ");
     }
   };
   const handleSnackbarClose = () => {
@@ -174,12 +178,13 @@ const ProductDetails = () => {
           </div>
 
           <div className="mt-12 flex items-center gap-5">
+
             <Button
               fullWidth
               variant="contained"
               startIcon={<AddShoppingCart />}
               sx={{ py: "1rem" }}
-              onClick={handleAddToCart}
+           onClick={  handleAddToCart}
             >
               {buttonText}
 

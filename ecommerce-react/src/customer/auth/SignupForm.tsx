@@ -25,7 +25,7 @@ const [signupError, setSignupError] = useState(false);
               signup({ email: values.email, otp: values.otp, fullName: values.fullName })
             ).unwrap(); // Wait for the action to complete and unwrap the result
             
-            if (response.success) { // Assuming the action returns a "success" flag
+            if (response.jwt) { // Assuming the action returns a "success" flag
               setIsSignup(true);
               // setSignupError(false);
               setTimeout(() => navigate('/'), 2000);
