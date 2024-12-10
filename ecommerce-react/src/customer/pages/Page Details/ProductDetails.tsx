@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import { teal } from "@mui/material/colors";
-import { Button, Divider } from "@mui/material";
+import { Button, Divider, Snackbar } from "@mui/material";
 import {
   AddShoppingCart,
   FavoriteBorder,
@@ -31,7 +31,8 @@ const ProductDetails = () => {
 
   const { wishlist } = useAppSelector((store) => store);
   const [isInWishlist, setIsInWishlist] = useState(false);
-
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [buttonText, setButtonText] = useState("Add to Cart");
 
   useEffect(() => {
     if (wishlist.wishlist) {
@@ -57,19 +58,23 @@ const ProductDetails = () => {
     }
     // productId&& dispatch(addProductToWishlist({ productId: product.product?.id}));
   };
-    const handleAddToCart=()=>{
-      if(product.product?.id&&product.product?.sizes){
-        const addItemRequest={
-          productId:product.product.id,
-          size:product.product.sizes[0],
-          quantity,
-        };
-        const jwt=localStorage.getItem("jwt")
-        dispatch(addItemToCart({jwt,request:addItemRequest}))
-      }
+  const handleAddToCart = () => {
+    if (product.product?.id && product.product?.sizes) {
+      const addItemRequest = {
+        productId: product.product.id,
+        size: product.product.sizes[0],
+        quantity,
+      };
+      const jwt = localStorage.getItem("jwt");
+      dispatch(addItemToCart({ jwt, request: addItemRequest }));
+      setSnackbarOpen(true);
+      setButtonText("Added ");
+      setTimeout(() => setButtonText("Add to Cart"), 2000);
     }
-
-
+  };
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   return (
     <div className="px-5 lg:px-20 pt-10">
@@ -158,19 +163,16 @@ const ProductDetails = () => {
               </Button>
               {/* <h1>Size</h1>
               <span>{product.product?.sizes}</span> */}
-
             </div>
           </div>
           <div className="flex justify-between items-center py-2 border w-[180px] px-3 mt-5">
             <div className="flex gap-1 items-center">
               <span>size</span>
-             
             </div>
             <Divider orientation="vertical" flexItem />
-            <span >{product.product?.sizes}</span>
+            <span>{product.product?.sizes}</span>
           </div>
 
-          
           <div className="mt-12 flex items-center gap-5">
             <Button
               fullWidth
@@ -179,7 +181,9 @@ const ProductDetails = () => {
               sx={{ py: "1rem" }}
               onClick={handleAddToCart}
             >
-              Add to Cart
+              {buttonText}
+
+              {/* Add to Cart */}
             </Button>
 
             <Button
@@ -187,10 +191,11 @@ const ProductDetails = () => {
               fullWidth
               variant="outlined"
               startIcon={
-                isInWishlist ?  <FavoriteOutlined   sx={{ color:  'red' }}/>:
-                   <FavoriteBorder
-                  sx={{ color:  teal[500] }}
-                />
+                isInWishlist ? (
+                  <FavoriteOutlined sx={{ color: "red" }} />
+                ) : (
+                  <FavoriteBorder sx={{ color: teal[500] }} />
+                )
 
                 // <FavoriteBorder
                 //   sx={{ color: isInWishlist ? "red" : teal[500] }}
@@ -202,9 +207,8 @@ const ProductDetails = () => {
             </Button>
           </div>
 
-
           <div className="mt-5">
-          <h1>Description</h1>
+            <h1>Description</h1>
             <p>{product.product?.description}</p>
           </div>
           <div className="mt-7">
@@ -212,6 +216,18 @@ const ProductDetails = () => {
           </div>
         </section>
       </div>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        message="Item added to cart"
+        action={
+          <Button color="inherit" size="small" onClick={handleSnackbarClose}>
+            {" "}
+            Close{" "}
+          </Button>
+        }
+      />
     </div>
   );
 };
