@@ -25,6 +25,7 @@ import Auth from './customer/auth/Auth';
 import { fetchUserProfile } from './state/authSlice';
 import Wishlist from './customer/pages/Wishlist/Wishlist';
 import Account from './admin/pages/Account/Account';
+import Review from './customer/pages/Review/Review';
 import PaymentSuccess from './customer/pages/PaymentSuccess';
 import OrderDetails from './admin/pages/Account/OrderDetails';
 
@@ -75,6 +76,7 @@ const navigate=useNavigate()
       <Route path='/products/:category' element={ <Product />}/>
       <Route path='/products/*' element={ <Product />}/>
       <Route path='/account/*' element={<Account/>}/>
+      <Route path='/review' element={<Review/>}/>
       <Route path="/order/test" element={<OrderDetails />} />
 
 
