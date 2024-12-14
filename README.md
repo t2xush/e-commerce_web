@@ -20,7 +20,8 @@ Enable account management, shopping, product management, and administrative task
 - **Database: MySQL**
 
 ## Key Features 
-**Completed Features .Fully Integrated:**
+**Completed Features .Fully Integrated:**  
+
 **1. For Customers:**
 - **Account Management:** Signup, Login, Logout, View Profile.
 - **Cart Management:** View, Add, Remove, Update items.
